@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HutBuilding" load_steps=5 format=3 uid="uid://cxjy7t6h3bkmr"]
+
+[ext_resource type="Script" path="res://world_objects/building/variants/hut.gd" id="1_7ocgv"]
+[ext_resource type="Script" path="res://world_objects/tiles/object_tiles.gd" id="2_ochdh"]
+[ext_resource type="Texture2D" uid="uid://c6n5m6xpsqbtg" path="res://assets/house_simple.png" id="3_xx88y"]
+
+[sub_resource type="Resource" id="Resource_noofg"]
+script = ExtResource("2_ochdh")
+texture = ExtResource("3_xx88y")
+
+[resource]
+script = ExtResource("1_7ocgv")
+id = 1
+type = 1
+display_name = "Regular Hut"
+static_tile = SubResource("Resource_noofg")

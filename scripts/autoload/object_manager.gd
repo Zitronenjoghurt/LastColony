@@ -1,0 +1,44 @@
+extends Node
+
+var objects_by_id: Array[WorldObject] = []
+var objects_count: int = len(WorldObject.ID.values())
+
+func load_objects() -> void:
+	var objects_dir: DirAccess = DirAccess.open(Paths.OBJECTS)
+	if objects_dir == null:
+		push_error("Failed to open objects directory at path %s" % Paths.OBJECTS)
+		return
+		
+	objects_by_id.resize(objects_count)
+	
+	for path: String in objects_dir.get_files():
+		var object: WorldObject = load(Paths.OBJECTS + path)
+		if not object is WorldObject:
+			push_error("Invalid world object '%s'" % path)
+			continue
+		if not objects_by_id[object.id] == null:
+			push_error("Duplicate world object '%s' with id '%s'" % [path, object.id])
+			continue
+		objects_by_id[object.id] = object
+	
+	if OS.is_debug_build():
+		for i: int in range(objects_count):
+			if objects_by_id[i] == null:
+				var id_name: String = WorldObject.ID.keys()[i]
+				push_warning("Unused world object id '%s'" % id_name)
+
+func generate_tileset() -> TileSet:
+	var tileset: TileSet = TileSet.new()
+	for object: WorldObject in objects_by_id:
+		if not object is WorldObject:
+			continue
+		tileset = object.push_tiles(tileset)
+	return tileset
+
+func new_object(id: WorldObject.ID) -> WorldObject:
+	if id >= objects_count:
+		return null
+	var object: WorldObject = objects_by_id[id]
+	if not object is WorldObject:
+		return null
+	return object.duplicate()
