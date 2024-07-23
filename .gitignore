@@ -13,3 +13,9 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Custom
+.DS_Store
+.vscode
+assets
+dist
