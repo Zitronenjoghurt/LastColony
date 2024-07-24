@@ -35,10 +35,7 @@ func generate_tileset() -> TileSet:
 		tileset = object.push_tiles(tileset)
 	return tileset
 
-func new_object(id: WorldObject.ID) -> WorldObject:
+func get_object(id: WorldObject.ID) -> WorldObject:
 	if id >= objects_count:
 		return null
-	var object: WorldObject = objects_by_id[id]
-	if not object is WorldObject:
-		return null
-	return object.duplicate()
+	return objects_by_id[id]
