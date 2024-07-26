@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://q66pg0q51boj"]
+
+[ext_resource type="FontFile" uid="uid://0qqkkhlx5esi" path="res://assets/fonts/Last Quirky v2.ttf" id="1_tgl8t"]
+[ext_resource type="Texture2D" uid="uid://b20ovkx6eqcf" path="res://assets/ui/ui_sheet.png" id="2_fo70h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqrdv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0pniq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdd6k"]
+atlas = ExtResource("2_fo70h")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pg78s"]
+texture = SubResource("AtlasTexture_tdd6k")
+texture_margin_left = 5.0
+texture_margin_top = 3.0
+texture_margin_right = 5.0
+texture_margin_bottom = 3.0
+
+[node name="MainMenu" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dqrdv")
+
+[node name="MenuContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="MenuContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("1_tgl8t")
+theme_override_font_sizes/font_size = 20
+text = "LAST COLONY"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MenuContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_0pniq")
+
+[node name="StartButton" type="Button" parent="MenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_tgl8t")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxTexture_pg78s")
+text = "START"

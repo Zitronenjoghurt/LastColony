@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://world_objects/types/building/states/hut.gd" id="1_pa0b4"]
 [ext_resource type="Script" path="res://world_objects/world_object.gd" id="1_u0ww6"]
 [ext_resource type="Script" path="res://world_objects/tiles/object_tile.gd" id="3_4ajns"]
-[ext_resource type="Texture2D" uid="uid://bb48741gjc4vf" path="res://assets/wooden_houset.png" id="4_1pypo"]
+[ext_resource type="Texture2D" uid="uid://bb48741gjc4vf" path="res://assets/wooden_house.png" id="4_1pypo"]
 
 [sub_resource type="Resource" id="Resource_8fo27"]
 script = ExtResource("1_pa0b4")

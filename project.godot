@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Last Colony"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://scenes/title_screen.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 ObjectManager="*res://scripts/autoload/object_manager.gd"
-GameManager="*res://scripts/autoload/game_manager.gd"
+GameManager="*res://scripts/game_manager/game_manager.gd"
 
 [debug]
 
@@ -61,6 +61,14 @@ gdscript/warnings/deprecated_keyword=2
 gdscript/warnings/confusable_identifier=2
 gdscript/warnings/confusable_local_declaration=2
 gdscript/warnings/confusable_local_usage=2
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/mode=3
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [rendering]
 
