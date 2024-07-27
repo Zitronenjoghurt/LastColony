@@ -1,22 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://q66pg0q51boj"]
 
 [ext_resource type="FontFile" uid="uid://0qqkkhlx5esi" path="res://assets/fonts/Last Quirky v2.ttf" id="1_tgl8t"]
-[ext_resource type="Texture2D" uid="uid://b20ovkx6eqcf" path="res://assets/ui/ui_sheet.png" id="2_fo70h"]
+[ext_resource type="FontFile" uid="uid://b6j8qjvo6wcv2" path="res://assets/fonts/upheavtt.ttf" id="2_mua35"]
+[ext_resource type="StyleBox" uid="uid://b8xpw3pvte1cm" path="res://resources/ui/button_textures/blue_normal.tres" id="3_8gyiv"]
+[ext_resource type="StyleBox" uid="uid://m3cisxsx08di" path="res://resources/ui/button_textures/blue_clicked.tres" id="4_xvrgq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqrdv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0pniq"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tdd6k"]
-atlas = ExtResource("2_fo70h")
-region = Rect2(0, 0, 32, 16)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pg78s"]
-texture = SubResource("AtlasTexture_tdd6k")
-texture_margin_left = 5.0
-texture_margin_top = 3.0
-texture_margin_right = 5.0
-texture_margin_bottom = 3.0
 
 [node name="MainMenu" type="PanelContainer"]
 anchors_preset = 15
@@ -35,8 +26,9 @@ size_flags_vertical = 4
 
 [node name="Title" type="Label" parent="MenuContainer"]
 layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.990667, 1, 0.98, 1)
+theme_override_colors/font_shadow_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_colors/font_outline_color = Color(0.156863, 0.156863, 0.180392, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 2
@@ -48,15 +40,67 @@ horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="MenuContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxEmpty_0pniq")
 
-[node name="StartButton" type="Button" parent="MenuContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_tgl8t")
-theme_override_font_sizes/font_size = 10
-theme_override_styles/normal = SubResource("StyleBoxTexture_pg78s")
+
+[node name="StartButton" type="Button" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_colors/font_pressed_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_colors/font_hover_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_colors/font_focus_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/icon_max_width = 0
+theme_override_fonts/font = ExtResource("2_mua35")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("3_8gyiv")
+theme_override_styles/hover = ExtResource("3_8gyiv")
+theme_override_styles/pressed = ExtResource("4_xvrgq")
+theme_override_styles/disabled = ExtResource("3_8gyiv")
 text = "START"
+
+[node name="StartButton2" type="Button" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_colors/font_pressed_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_colors/font_hover_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_colors/font_focus_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/icon_max_width = 0
+theme_override_fonts/font = ExtResource("2_mua35")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("3_8gyiv")
+theme_override_styles/hover = ExtResource("3_8gyiv")
+theme_override_styles/pressed = ExtResource("4_xvrgq")
+theme_override_styles/disabled = ExtResource("3_8gyiv")
+text = "SETTINGS"
+
+[node name="StartButton3" type="Button" parent="MenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_colors/font_pressed_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_colors/font_hover_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_colors/font_focus_color = Color(0.156863, 0.156863, 0.180392, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/icon_max_width = 0
+theme_override_fonts/font = ExtResource("2_mua35")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("3_8gyiv")
+theme_override_styles/hover = ExtResource("3_8gyiv")
+theme_override_styles/pressed = ExtResource("4_xvrgq")
+theme_override_styles/disabled = ExtResource("3_8gyiv")
+text = "QUIT"
