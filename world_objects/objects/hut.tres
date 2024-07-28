@@ -10,7 +10,7 @@ script = ExtResource("1_pa0b4")
 capacity = 3
 habitant_ids = Array[int]([])
 
-[sub_resource type="Resource" id="Resource_fqb5y"]
+[sub_resource type="Resource" id="Resource_8kc8e"]
 script = ExtResource("3_4ajns")
 texture = ExtResource("4_1pypo")
 
@@ -20,4 +20,4 @@ id = 1
 type = 1
 display_name = "Wooden Hut"
 default_state = SubResource("Resource_8fo27")
-static_tile = SubResource("Resource_fqb5y")
+tile_up_inactive = SubResource("Resource_8kc8e")

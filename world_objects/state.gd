@@ -2,13 +2,31 @@ class_name WorldObjectState
 extends Resource
 
 var id: WorldObject.ID
+var is_active: bool = false
+var is_grounded: bool = false
 
-func get_display_name() -> String:
+func get_world_object() -> WorldObject:
 	if not id is WorldObject.ID:
-		push_error("Error while trying to retrieve WorldObjectState display name: WorldObject id for WorldObjectState '%s' has not been set" % resource_name)
-		return "missing name"
+		push_error("Error while trying to retrieve WorldObject: WorldObject id for WorldObjectState '%s' has not been set" % resource_name)
+		return null
 	var object: WorldObject = ObjectManager.get_object(id)
 	if not object is WorldObject:
-		push_error("Error while trying to retrieve WorldObjectState display name: WorldObject for id '%s' does exist" % WorldObject.ID.keys()[id])
-		return "missing name"
-	return object.display_name
+		push_error("Error while trying to retrieve WorldObject: WorldObject for id '%s' does exist" % WorldObject.ID.keys()[id])
+		return null
+	return object
+
+# Returns the source ID of the tile to be displayed by this object
+func get_current_tile() -> WorldObjectTile:
+	var object: WorldObject = get_world_object()
+	if not object is WorldObject:
+		return null
+	
+	if is_active and is_grounded:
+		return object.tile_ground_active
+	if is_active and not is_grounded:
+		return object.tile_up_active
+	if not is_active and is_grounded:
+		return object.tile_ground_inactive
+	if not is_active and not is_grounded:
+		return object.tile_up_inactive
+	return null

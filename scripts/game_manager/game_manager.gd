@@ -1,7 +1,29 @@
 extends Node
 
+var world_scene: PackedScene = load(Paths.WORLD_SCENE)
 var buildings_tileset: TileSet
+var state: GameState
+
+signal load_game_started()
+signal load_game_finished()
 
 func _ready() -> void:
 	ObjectManager.load_objects()
 	buildings_tileset = ObjectManager.generate_tileset()
+
+func load_game(index: int = 0) -> void:
+	load_game_started.emit()
+	state = GameState.load_state(index)
+	
+	# Add an object and save state for testing purposes
+	var object_state: WorldObjectState = ObjectManager.new_object_state(WorldObject.ID.HUT)
+	state.add_object_state(1814, object_state)
+	state.save()
+	
+	get_tree().change_scene_to_packed(world_scene)
+	
+func get_state() -> GameState:
+	return state
+
+func build_world_finished() -> void:
+	load_game_finished.emit()

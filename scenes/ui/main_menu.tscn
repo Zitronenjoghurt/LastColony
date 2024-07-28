@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://q66pg0q51boj"]
+[gd_scene load_steps=8 format=3 uid="uid://q66pg0q51boj"]
 
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_jgs5q"]
 [ext_resource type="FontFile" uid="uid://0qqkkhlx5esi" path="res://assets/fonts/Last Quirky v2.ttf" id="1_tgl8t"]
 [ext_resource type="FontFile" uid="uid://b6j8qjvo6wcv2" path="res://assets/fonts/upheavtt.ttf" id="2_mua35"]
 [ext_resource type="StyleBox" uid="uid://b8xpw3pvte1cm" path="res://resources/ui/button_textures/blue_normal.tres" id="3_8gyiv"]
@@ -18,6 +19,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_dqrdv")
+script = ExtResource("1_jgs5q")
 
 [node name="MenuContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -67,7 +69,7 @@ theme_override_styles/pressed = ExtResource("4_xvrgq")
 theme_override_styles/disabled = ExtResource("3_8gyiv")
 text = "START"
 
-[node name="StartButton2" type="Button" parent="MenuContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 focus_mode = 0
@@ -86,7 +88,7 @@ theme_override_styles/pressed = ExtResource("4_xvrgq")
 theme_override_styles/disabled = ExtResource("3_8gyiv")
 text = "SETTINGS"
 
-[node name="StartButton3" type="Button" parent="MenuContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="MenuContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 focus_mode = 0
@@ -104,3 +106,5 @@ theme_override_styles/hover = ExtResource("3_8gyiv")
 theme_override_styles/pressed = ExtResource("4_xvrgq")
 theme_override_styles/disabled = ExtResource("3_8gyiv")
 text = "QUIT"
+
+[connection signal="pressed" from="MenuContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

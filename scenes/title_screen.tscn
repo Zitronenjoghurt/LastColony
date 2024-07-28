@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://b26qs13rq8npw"]
+[gd_scene load_steps=3 format=3 uid="uid://b26qs13rq8npw"]
 
 [ext_resource type="PackedScene" uid="uid://q66pg0q51boj" path="res://scenes/ui/main_menu.tscn" id="1_4mrmn"]
+[ext_resource type="Script" path="res://scripts/ui/title_screen.gd" id="1_kwsyc"]
 
 [node name="TitleScreen" type="Node2D"]
+script = ExtResource("1_kwsyc")
 
 [node name="TitleScreenUI" type="CanvasLayer" parent="."]
 
 [node name="MainMenu" parent="TitleScreenUI" instance=ExtResource("1_4mrmn")]
+unique_name_in_owner = true

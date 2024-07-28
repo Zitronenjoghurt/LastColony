@@ -39,3 +39,9 @@ func get_object(id: WorldObject.ID) -> WorldObject:
 	if id >= objects_count:
 		return null
 	return objects_by_id[id]
+
+func new_object_state(id: WorldObject.ID) -> WorldObjectState:
+	var object: WorldObject = get_object(id)
+	if not object is WorldObject:
+		return null
+	return object.new_state()
