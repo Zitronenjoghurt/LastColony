@@ -3,11 +3,13 @@ extends Node
 var world_scene: PackedScene = load(Paths.WORLD_SCENE)
 var buildings_tileset: TileSet
 var state: GameState
+var global: GlobalState
 
 signal load_game_started()
 signal load_game_finished()
 
 func _ready() -> void:
+	global = GlobalState.load_state()
 	ObjectManager.load_objects()
 	buildings_tileset = ObjectManager.generate_tileset()
 

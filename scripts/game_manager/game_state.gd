@@ -7,7 +7,7 @@ extends Resource
 @export var map_width: int = 200
 @export var object_states: Dictionary = {}
 
-var lock_add_object_state: Mutex = Mutex.new()
+var lock_object_states: Mutex = Mutex.new()
 
 func limit_camera(camera: Camera2D) -> void:
 	camera.limit_bottom = map_height * 16
@@ -32,9 +32,9 @@ func get_object_state_by_index(index: int) -> WorldObjectState:
 func add_object_state(index: int, object_state: WorldObjectState) -> bool:
 	if index in object_states:
 		return false
-	lock_add_object_state.lock()
+	lock_object_states.lock()
 	object_states[index] = object_state
-	lock_add_object_state.unlock()
+	lock_object_states.unlock()
 	return true
 
 static func create_new(index: int) -> GameState:

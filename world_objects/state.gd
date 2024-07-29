@@ -1,9 +1,9 @@
 class_name WorldObjectState
 extends Resource
 
-var id: WorldObject.ID
-var is_active: bool = false
-var is_grounded: bool = false
+@export var id: WorldObject.ID
+@export var is_active: bool = false
+@export var is_grounded: bool = false
 
 func get_world_object() -> WorldObject:
 	if not id is WorldObject.ID:
@@ -11,7 +11,7 @@ func get_world_object() -> WorldObject:
 		return null
 	var object: WorldObject = ObjectManager.get_object(id)
 	if not object is WorldObject:
-		push_error("Error while trying to retrieve WorldObject: WorldObject for id '%s' does exist" % WorldObject.ID.keys()[id])
+		push_error("Error while trying to retrieve WorldObject: WorldObject for id '%s' does not exist" % WorldObject.ID.keys()[id])
 		return null
 	return object
 

@@ -1,24 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm2yqylokt6ou"]
+[gd_scene load_steps=3 format=3 uid="uid://bm2yqylokt6ou"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_exsqd"]
-[ext_resource type="Texture2D" uid="uid://bb48741gjc4vf" path="res://assets/wooden_house.png" id="2_frue0"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_is0wo"]
-texture = ExtResource("2_frue0")
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_sgeba"]
-sources/0 = SubResource("TileSetAtlasSource_is0wo")
+[ext_resource type="Script" path="res://scripts/camera.gd" id="2_735pi"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_exsqd")
 
 [node name="TileMap" type="TileMap" parent="."]
 unique_name_in_owner = true
-tile_set = SubResource("TileSet_sgeba")
 format = 2
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
 limit_left = 0
 limit_top = 0
+script = ExtResource("2_735pi")
