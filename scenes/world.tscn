@@ -1,12 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm2yqylokt6ou"]
+[gd_scene load_steps=7 format=3 uid="uid://bm2yqylokt6ou"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_exsqd"]
+[ext_resource type="Texture2D" uid="uid://bn8edlx8rc2nl" path="res://assets/ui/grid_tile.png" id="2_5kb5u"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_735pi"]
+[ext_resource type="Script" path="res://scripts/ui/grid_map.gd" id="2_xmf30"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j6u4i"]
+texture = ExtResource("2_5kb5u")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6c056"]
+sources/0 = SubResource("TileSetAtlasSource_j6u4i")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_exsqd")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="GridMap" type="TileMap" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.262745)
+tile_set = SubResource("TileSet_6c056")
+format = 2
+script = ExtResource("2_xmf30")
+
+[node name="ObjectMap" type="TileMap" parent="."]
 unique_name_in_owner = true
 format = 2
 

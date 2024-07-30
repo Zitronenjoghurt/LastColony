@@ -1,13 +1,15 @@
 class_name World
 extends Node2D
 
-@onready var tilemap: TileMap = %TileMap
+@onready var grid_map: BackgroundGridMap = %GridMap
+@onready var object_map: TileMap = %ObjectMap
 @onready var camera: Camera2D = %Camera
 
 func _ready() -> void:
 	add_to_group("world")
-	tilemap.tile_set = GameManager.buildings_tileset
+	object_map.tile_set = GameManager.objects_tileset
 	GameManager.state.limit_camera(camera)
+	grid_map.draw(GameManager.state.map_width, GameManager.state.map_height)
 	_draw_all_world_objects()
 	GameManager.build_world_finished()
 
@@ -21,4 +23,4 @@ func _draw_all_world_objects() -> void:
 		if not object_tile is WorldObjectTile or object_tile.source_id == -1:
 			continue
 		var coords: Vector2i = game_state.index_to_coords(index)
-		tilemap.set_cell(0, coords, object_tile.source_id, Vector2i(0, 0))
+		object_map.set_cell(0, coords, object_tile.source_id, Vector2i(0, 0))
