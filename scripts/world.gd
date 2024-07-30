@@ -9,7 +9,7 @@ func _ready() -> void:
 	add_to_group("world")
 	object_map.tile_set = GameManager.objects_tileset
 	GameManager.state.limit_camera(camera)
-	grid_map.draw(GameManager.state.map_width, GameManager.state.map_height)
+	grid_map.draw(GameManager.state.map_height, GameManager.state.map_width,)
 	_draw_all_world_objects()
 	GameManager.build_world_finished()
 
