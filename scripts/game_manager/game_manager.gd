@@ -19,13 +19,11 @@ func load_game(index: int = 0) -> void:
 	
 	# Add an object and save state for testing purposes
 	var object_state: WorldObjectState = ObjectManager.new_object_state(WorldObject.ID.HUT)
+	state.add_object_state(0, object_state)
 	state.add_object_state(1814, object_state)
 	state.save()
 	
 	get_tree().change_scene_to_packed(world_scene)
-	
-func get_state() -> GameState:
-	return state
 
 func build_world_finished() -> void:
 	load_game_finished.emit()
