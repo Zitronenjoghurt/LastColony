@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlr5n5is4debn"]
+
+[ext_resource type="Script" path="res://scripts/ui/clickable_icon.gd" id="1_bgg3l"]
+[ext_resource type="Texture2D" uid="uid://bmxm20ch1fnua" path="res://assets/ui/background_tiles.png" id="2_6rdom"]
+
+[node name="ClickableIcon" type="Panel"]
+script = ExtResource("1_bgg3l")
+background_tiles = ExtResource("2_6rdom")
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
