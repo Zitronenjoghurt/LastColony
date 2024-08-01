@@ -11,8 +11,14 @@ enum TYPE {
 	BUILDING
 }
 
+enum BuildingCategory {
+	NONE,
+	HOUSING
+}
+
 @export var id: ID
 @export var type: TYPE
+@export var building_category: BuildingCategory = BuildingCategory.NONE
 @export var display_name: String
 @export var default_state: WorldObjectState
 @export var icon: Texture2D

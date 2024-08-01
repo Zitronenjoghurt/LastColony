@@ -1,5 +1,6 @@
 extends Node
 
+var placeholder_tile_texture: Texture2D = load(Paths.PLACEHOLDER_TILE)
 var objects_by_id: Array[WorldObject] = []
 var objects_count: int = len(WorldObject.ID.values())
 
@@ -29,6 +30,13 @@ func load_objects() -> void:
 
 func generate_tileset() -> TileSet:
 	var tileset: TileSet = TileSet.new()
+	
+	# Add placeholder tile at index 0 to tileset
+	var placeholder_source: TileSetAtlasSource = TileSetAtlasSource.new()
+	placeholder_source.texture = placeholder_tile_texture
+	placeholder_source.create_tile(Vector2i(0, 0))
+	tileset.add_source(placeholder_source)
+	
 	for object: WorldObject in objects_by_id:
 		if not object is WorldObject:
 			continue

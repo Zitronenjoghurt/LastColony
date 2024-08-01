@@ -20,7 +20,7 @@ func _draw_all_world_objects() -> void:
 		if not object_state is WorldObjectState:
 			continue
 		var object_tile: WorldObjectTile = object_state.get_current_tile()
-		if not object_tile is WorldObjectTile or object_tile.source_id == -1:
-			continue
+		if not object_tile is WorldObjectTile:
+			object_tile = WorldObjectTile.create_placeholder(object_state)
 		var coords: Vector2i = game_state.index_to_coords(index)
-		object_map.set_cell(0, coords, object_tile.source_id, Vector2i(0, 0))
+		object_tile.draw_at_coords(object_map, coords)
