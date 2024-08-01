@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://c1ds122ku4jg5"]
+[gd_scene load_steps=5 format=3 uid="uid://c1ds122ku4jg5"]
 
-[node name="BuildingTypeSelection" type="PanelContainer"]
+[ext_resource type="PackedScene" uid="uid://dlr5n5is4debn" path="res://scenes/ui/clickable_icon.tscn" id="1_dt762"]
+[ext_resource type="Script" path="res://scripts/ui/building_type_selection.gd" id="1_h34k5"]
+[ext_resource type="Texture2D" uid="uid://drqggj2n14p2p" path="res://assets/ui/building_menu_icons.png" id="2_hccsl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayxfg"]
+atlas = ExtResource("2_hccsl")
+region = Rect2(16, 0, 16, 16)
+
+[node name="BuildingTypeSelection" type="GridContainer"]
+columns = 3
+script = ExtResource("1_h34k5")
+housing_icon = SubResource("AtlasTexture_ayxfg")
+
+[node name="Housing" parent="." instance=ExtResource("1_dt762")]
+unique_name_in_owner = true
+layout_mode = 2
+color = 1
+
+[connection signal="pressed" from="Housing" to="." method="_on_housing_pressed"]

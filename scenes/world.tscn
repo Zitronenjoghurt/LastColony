@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm2yqylokt6ou"]
+[gd_scene load_steps=9 format=3 uid="uid://bm2yqylokt6ou"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_exsqd"]
 [ext_resource type="Texture2D" uid="uid://bn8edlx8rc2nl" path="res://assets/ui/grid_tile.png" id="2_5kb5u"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_735pi"]
 [ext_resource type="Script" path="res://scripts/ui/grid_map.gd" id="2_xmf30"]
+[ext_resource type="Script" path="res://scripts/ui/ui_root.gd" id="5_6pb8k"]
+[ext_resource type="PackedScene" uid="uid://c1ds122ku4jg5" path="res://scenes/ui/building_type_selection.tscn" id="6_c6obo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j6u4i"]
 texture = ExtResource("2_5kb5u")
@@ -31,3 +33,15 @@ unique_name_in_owner = true
 limit_left = 0
 limit_top = 0
 script = ExtResource("2_735pi")
+
+[node name="UIRoot" type="CanvasLayer" parent="."]
+script = ExtResource("5_6pb8k")
+
+[node name="BuildingTypeSelection" parent="UIRoot" instance=ExtResource("6_c6obo")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0

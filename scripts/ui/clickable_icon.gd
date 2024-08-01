@@ -1,5 +1,5 @@
 class_name ClickableIcon
-extends Panel
+extends PanelContainer
 
 enum BackgroundColor {
 	NONE,
@@ -17,6 +17,7 @@ enum BackgroundColor {
 
 @export var background_tiles: Texture2D
 @export var background_texture_margin: int = 0
+@export var background_content_margin: int = 2
 @export var color: BackgroundColor = BackgroundColor.NONE
 @onready var icon_rect: TextureRect = %Icon
 
@@ -40,6 +41,10 @@ func display_background() -> void:
 		atlas_texture.region = atlas_rect
 		var stylebox: StyleBoxTexture = StyleBoxTexture.new()
 		stylebox.texture = atlas_texture
+		stylebox.content_margin_bottom = background_content_margin
+		stylebox.content_margin_left= background_content_margin
+		stylebox.content_margin_right = background_content_margin
+		stylebox.content_margin_top = background_content_margin
 		stylebox.texture_margin_bottom = background_texture_margin
 		stylebox.texture_margin_left = background_texture_margin
 		stylebox.texture_margin_right = background_texture_margin
