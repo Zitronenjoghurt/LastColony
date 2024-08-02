@@ -6,8 +6,11 @@ extends Resource
 @export var map_height: int = 50
 @export var map_width: int = 200
 @export var object_states: Dictionary = {}
+@export var pawns: Dictionary = {}
+@export var new_pawn_index: int = 0
 
 var lock_object_states: Mutex = Mutex.new()
+var lock_pawns: Mutex = Mutex.new()
 
 func limit_camera(camera: Camera2D) -> void:
 	camera.limit_bottom = map_height * 16
@@ -36,6 +39,12 @@ func add_object_state(index: int, object_state: WorldObjectState) -> bool:
 	object_states[index] = object_state
 	lock_object_states.unlock()
 	return true
+	
+func add_pawn(pawn: Pawn) -> void:
+	lock_pawns.lock()
+	pawns[new_pawn_index] = pawn
+	new_pawn_index += 1
+	lock_pawns.unlock()
 
 static func create_new(index: int) -> GameState:
 	var state: GameState = GameState.new()
