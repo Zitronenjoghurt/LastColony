@@ -3,7 +3,8 @@ extends Resource
 
 enum ID {
 	TREES,
-	HUT
+	HUT,
+	DIRT
 }
 
 enum TYPE {

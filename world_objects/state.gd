@@ -3,6 +3,10 @@ extends Resource
 
 @export var id: WorldObject.ID
 
+# What happens when you place this object
+func place() -> void:
+	return
+
 func get_world_object() -> WorldObject:
 	if not id is WorldObject.ID:
 		push_error("Error while trying to retrieve WorldObject: WorldObject id for WorldObjectState '%s' has not been set" % resource_name)
