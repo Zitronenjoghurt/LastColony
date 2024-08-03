@@ -25,7 +25,7 @@ func load_objects() -> void:
 	if OS.is_debug_build():
 		for i: int in range(objects_count):
 			if objects_by_id[i] == null:
-				var id_name: String = WorldObject.ID.keys()[i]
+				var id_name: String = WorldObject.get_id_name(i)
 				push_warning("Unused world object id '%s'" % id_name)
 
 func generate_tileset() -> TileSet:

@@ -19,6 +19,9 @@ enum BackgroundColor {
 @export var background_texture_margin: int = 0
 @export var background_content_margin: int = 2
 @export var color: BackgroundColor = BackgroundColor.NONE
+@export var hoverable: bool = true
+
+@onready var hover_overlay: Panel = %HoverOverlay
 @onready var icon_rect: TextureRect = %Icon
 
 signal pressed(button_index: int)
@@ -42,7 +45,7 @@ func display_background() -> void:
 		var stylebox: StyleBoxTexture = StyleBoxTexture.new()
 		stylebox.texture = atlas_texture
 		stylebox.content_margin_bottom = background_content_margin
-		stylebox.content_margin_left= background_content_margin
+		stylebox.content_margin_left = background_content_margin
 		stylebox.content_margin_right = background_content_margin
 		stylebox.content_margin_top = background_content_margin
 		stylebox.texture_margin_bottom = background_texture_margin
@@ -57,3 +60,9 @@ func _on_gui_input(event: InputEvent) -> void:
 			pressed.emit(event.button_index)
 		else:
 			released.emit(event.button_index)
+
+func _on_mouse_entered() -> void:
+	hover_overlay.show()
+
+func _on_mouse_exited() -> void:
+	hover_overlay.hide()

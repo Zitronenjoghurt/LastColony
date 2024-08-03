@@ -26,4 +26,4 @@ func draw_at_coords(tile_map: TileMap, coords: Vector2i) -> void:
 	tile_map.set_cell(0, coords, source_id, Vector2i(0, y_offset))
 	
 	if placeholder_object_state is WorldObjectState:
-		push_error("Missing tile texture at cell '%s' for world object id '%s'" % [coords, WorldObject.ID.keys()[placeholder_object_state.id]])
+		push_error("Missing tile texture at cell '%s' for world object id '%s'" % [coords, WorldObject.get_id_name(placeholder_object_state.id)])

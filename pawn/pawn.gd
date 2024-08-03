@@ -7,6 +7,7 @@ enum PresetType {
 }
 
 @export var name: String = "no_name"
+@export var current_location: Vector2i = Vector2i(-1, -1)
 @export var home_location: Vector2i = Vector2i(-1, -1)
 @export var work_location: Vector2i = Vector2i(-1, -1)
 @export var delta_ticks: int = 0
@@ -29,7 +30,7 @@ func get_age_years() -> int:
 static func create_from_preset(preset: PresetType) -> Pawn:
 	match preset:
 		PresetType.ADULT:
-			return
+			return create_adult()
 	return Pawn.new()
 
 static func create_adult() -> Pawn:

@@ -8,7 +8,8 @@ enum ID {
 
 enum TYPE {
 	ENVIRONMENT,
-	BUILDING
+	BUILDING,
+	STATIC
 }
 
 enum BuildingCategory {
@@ -29,10 +30,10 @@ enum JobType {
 @export var display_name: String
 @export var default_state: WorldObjectState
 @export var icon: Texture2D
-@export var tile_ground_inactive: WorldObjectTile
-@export var tile_ground_active: WorldObjectTile
-@export var tile_up_inactive: WorldObjectTile
-@export var tile_up_active: WorldObjectTile
+@export var supports_buildings: bool = true
+@export var is_ground: bool = false
+@export var vertical_speed_multiplier: float = 1.0
+@export var horizontal_speed_multiplier: float = 1.0
 
 func push_tile(tile: WorldObjectTile, tileset: TileSet) -> TileSet:
 	if not tile is WorldObjectTile:
@@ -42,13 +43,12 @@ func push_tile(tile: WorldObjectTile, tileset: TileSet) -> TileSet:
 	return tileset
 	
 func push_tiles(tileset: TileSet) -> TileSet:
-	tileset = push_tile(tile_ground_active, tileset)
-	tileset = push_tile(tile_ground_inactive, tileset)
-	tileset = push_tile(tile_up_active, tileset)
-	tileset = push_tile(tile_up_inactive, tileset)
 	return tileset
 
 func new_state() -> WorldObjectState:
 	var state: WorldObjectState = default_state.duplicate(true)
 	state.id = id
 	return state
+
+static func get_id_name(_id: ID) -> String:
+	return ID.keys()[_id]

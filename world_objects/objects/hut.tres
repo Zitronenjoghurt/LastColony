@@ -1,46 +1,47 @@
-[gd_resource type="Resource" script_class="WorldObject" load_steps=10 format=3 uid="uid://bqvd07d60ihhe"]
+[gd_resource type="Resource" script_class="BuildingObject" load_steps=10 format=3 uid="uid://cdguvtdn4k47q"]
 
-[ext_resource type="Script" path="res://world_objects/types/building/states/hut.gd" id="1_pa0b4"]
-[ext_resource type="Script" path="res://world_objects/world_object.gd" id="1_u0ww6"]
+[ext_resource type="Script" path="res://world_objects/types/building/states/housing.gd" id="1_pa0b4"]
+[ext_resource type="Script" path="res://world_objects/types/building/building.gd" id="1_ysl2l"]
 [ext_resource type="Texture2D" uid="uid://cn0let38x5y65" path="res://assets/objects/hut/hut.png" id="2_xyxfs"]
 [ext_resource type="Script" path="res://world_objects/tiles/object_tile.gd" id="3_4ajns"]
 
-[sub_resource type="Resource" id="Resource_8fo27"]
+[sub_resource type="Resource" id="Resource_oy7g3"]
 script = ExtResource("1_pa0b4")
-capacity = 3
+capacity = 0
 habitant_ids = Array[int]([])
 id = 0
-is_active = false
-is_grounded = false
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mumwl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqgpg"]
 atlas = ExtResource("2_xyxfs")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_t2hll"]
+[sub_resource type="Resource" id="Resource_87n0e"]
 script = ExtResource("3_4ajns")
 texture = ExtResource("2_xyxfs")
+y_offset = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wggt"]
+load_path = "res://.godot/imported/hut.png-11e359119cae751511df222a9b16c2c8.ctex"
+
+[sub_resource type="Resource" id="Resource_j176y"]
+script = ExtResource("3_4ajns")
+texture = SubResource("CompressedTexture2D_0wggt")
 y_offset = 1
 
-[sub_resource type="Resource" id="Resource_kof3y"]
-script = ExtResource("3_4ajns")
-texture = ExtResource("2_xyxfs")
-y_offset = 0
-
-[sub_resource type="Resource" id="Resource_8kc8e"]
-script = ExtResource("3_4ajns")
-texture = ExtResource("2_xyxfs")
-y_offset = 0
-
 [resource]
-script = ExtResource("1_u0ww6")
+script = ExtResource("1_ysl2l")
+tile_ground_inactive = SubResource("Resource_87n0e")
+tile_ground_active = SubResource("Resource_87n0e")
+tile_up_inactive = SubResource("Resource_j176y")
+tile_up_active = SubResource("Resource_j176y")
 id = 1
 type = 1
 building_category = 1
-display_name = "Wooden Hut"
-default_state = SubResource("Resource_8fo27")
-icon = SubResource("AtlasTexture_mumwl")
-tile_ground_inactive = SubResource("Resource_t2hll")
-tile_ground_active = SubResource("Resource_t2hll")
-tile_up_inactive = SubResource("Resource_8kc8e")
-tile_up_active = SubResource("Resource_kof3y")
+job_type = 0
+display_name = "Hut"
+default_state = SubResource("Resource_oy7g3")
+icon = SubResource("AtlasTexture_fqgpg")
+supports_buildings = true
+is_ground = false
+vertical_speed_multiplier = 1.0
+horizontal_speed_multiplier = 1.0
