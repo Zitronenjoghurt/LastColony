@@ -1,28 +1,28 @@
 [gd_scene load_steps=9 format=3 uid="uid://bm2yqylokt6ou"]
 
-[ext_resource type="Script" path="res://scripts/world.gd" id="1_exsqd"]
-[ext_resource type="Texture2D" uid="uid://bn8edlx8rc2nl" path="res://assets/ui/grid_tile.png" id="2_5kb5u"]
-[ext_resource type="Script" path="res://scripts/camera.gd" id="2_735pi"]
-[ext_resource type="Script" path="res://scripts/ui/grid_map.gd" id="2_xmf30"]
-[ext_resource type="Script" path="res://scripts/ui/ui_root.gd" id="5_6pb8k"]
-[ext_resource type="PackedScene" uid="uid://c1ds122ku4jg5" path="res://scenes/ui/building_type_selection.tscn" id="6_c6obo"]
+[ext_resource type="Script" path="res://world/world.gd" id="1_wy3uv"]
+[ext_resource type="Texture2D" uid="uid://bn8edlx8rc2nl" path="res://assets/ui/grid_tile.png" id="2_xmiwf"]
+[ext_resource type="Script" path="res://scripts/ui/grid_map.gd" id="3_a8qld"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="4_yvdaj"]
+[ext_resource type="Script" path="res://scripts/ui/ui_root.gd" id="5_u0moa"]
+[ext_resource type="PackedScene" uid="uid://c1ds122ku4jg5" path="res://scenes/ui/building_type_selection.tscn" id="6_sup2h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j6u4i"]
-texture = ExtResource("2_5kb5u")
+texture = ExtResource("2_xmiwf")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_6c056"]
 sources/0 = SubResource("TileSetAtlasSource_j6u4i")
 
 [node name="World" type="Node2D"]
-script = ExtResource("1_exsqd")
+script = ExtResource("1_wy3uv")
 
 [node name="GridMap" type="TileMap" parent="."]
 unique_name_in_owner = true
 modulate = Color(0, 0, 0, 0.262745)
 tile_set = SubResource("TileSet_6c056")
 format = 2
-script = ExtResource("2_xmf30")
+script = ExtResource("3_a8qld")
 
 [node name="ObjectMap" type="TileMap" parent="."]
 unique_name_in_owner = true
@@ -32,12 +32,12 @@ format = 2
 unique_name_in_owner = true
 limit_left = 0
 limit_top = 0
-script = ExtResource("2_735pi")
+script = ExtResource("4_yvdaj")
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
-script = ExtResource("5_6pb8k")
+script = ExtResource("5_u0moa")
 
-[node name="BuildingTypeSelection" parent="UIRoot" instance=ExtResource("6_c6obo")]
+[node name="BuildingTypeSelection" parent="UIRoot" instance=ExtResource("6_sup2h")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

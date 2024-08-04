@@ -12,6 +12,12 @@ func _ready() -> void:
 	global = GlobalState.load_state()
 	ObjectManager.load_objects()
 	objects_tileset = ObjectManager.generate_tileset()
+	
+	if OS.is_debug_build():
+		_debug_startup_checks()
+	
+func _debug_startup_checks() -> void:
+	Paths.check()
 
 func load_game(index: int = 0) -> void:
 	load_game_started.emit()
