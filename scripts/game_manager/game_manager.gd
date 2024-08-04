@@ -23,6 +23,8 @@ func load_game(index: int = 0) -> void:
 	state.add_object_state(1814, object_state)
 	state.save()
 	
+	state.update_buildable_map()
+	
 	get_tree().change_scene_to_packed(world_scene)
 
 func build_world_finished() -> void:

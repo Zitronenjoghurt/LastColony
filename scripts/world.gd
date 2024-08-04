@@ -9,9 +9,13 @@ func _ready() -> void:
 	add_to_group("world")
 	object_map.tile_set = GameManager.objects_tileset
 	GameManager.state.limit_camera(camera)
-	grid_map.draw(GameManager.state.map_height, GameManager.state.map_width,)
+	_init_grid_map()
 	_draw_all_world_objects()
 	GameManager.build_world_finished()
+	
+func _init_grid_map() -> void:
+	grid_map.initialize(GameManager.state.map_height, GameManager.state.map_width)
+	grid_map.draw_from_bitmap(GameManager.state.buildable_map)
 
 func _draw_all_world_objects() -> void:
 	var game_state: GameState = GameManager.state as GameState

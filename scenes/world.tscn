@@ -19,7 +19,7 @@ script = ExtResource("1_exsqd")
 
 [node name="GridMap" type="TileMap" parent="."]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.262745)
+modulate = Color(0, 0, 0, 0.262745)
 tile_set = SubResource("TileSet_6c056")
 format = 2
 script = ExtResource("2_xmf30")
