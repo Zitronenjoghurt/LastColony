@@ -4,7 +4,8 @@ extends Resource
 enum ID {
 	TREES,
 	HUT,
-	DIRT
+	DIRT_TOP,
+	DIRT_BLOCK
 }
 
 enum TYPE {
@@ -32,6 +33,7 @@ enum JobType {
 @export var default_state: WorldObjectState
 @export var icon: Texture2D
 @export var supports_buildings: bool = true
+# Determines if buildings placed on this object will get is_grounded = true
 @export var is_ground: bool = false
 @export var vertical_speed_multiplier: float = 1.0
 @export var horizontal_speed_multiplier: float = 1.0
@@ -52,4 +54,6 @@ func new_state() -> WorldObjectState:
 	return state
 
 static func get_id_name(_id: ID) -> String:
+	if _id >= len(ID.keys()):
+		return str(_id)
 	return ID.keys()[_id]

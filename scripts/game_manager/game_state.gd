@@ -10,7 +10,7 @@ extends Resource
 @export var new_pawn_index: int = 0
 
 # Maps
-@export var buildable_map: Array[int] = []
+var buildable_map: Array[int] = []
 
 var lock_object_states: Mutex = Mutex.new()
 var lock_pawns: Mutex = Mutex.new()
@@ -32,11 +32,29 @@ func get_object_state_indices() -> Array:
 	
 func get_object_state_by_index(index: int) -> WorldObjectState:
 	if not index in object_states:
+		push_warning("Tried to access object state of index '%s' but it yielded null" % index)
 		return null
 	return object_states[index]
 	
+func add_new_object_state_at_coords(coords: Vector2i, object_id: WorldObject.ID) -> bool:
+	var index: int = coords_to_index(coords)
+	return add_new_object_state(index, object_id)
+
+func add_new_object_state(index: int, object_id: WorldObject.ID) -> bool:
+	var object: WorldObject = ObjectManager.get_object(object_id)
+	if not object is WorldObject:
+		push_error("An error occured while adding new object state of id '%s': Given ID did not yield any WorldObject" % WorldObject.get_id_name(object_id))
+		return false
+	var state: WorldObjectState = object.new_state()
+	return add_object_state(index, state)
+	
+func add_object_state_at_coords(coords: Vector2i, object_state: WorldObjectState) -> bool:
+	var index: int = coords_to_index(coords)
+	return add_object_state(index, object_state)
+
 func add_object_state(index: int, object_state: WorldObjectState) -> bool:
 	if index in object_states:
+		push_error("An error occured while adding object state of id '%s' at index '%s': There is already a state at the given index" % [WorldObject.get_id_name(object_state.id), index])
 		return false
 	lock_object_states.lock()
 	object_states[index] = object_state
@@ -45,6 +63,7 @@ func add_object_state(index: int, object_state: WorldObjectState) -> bool:
 	
 func get_pawn_by_index(index: int) -> Pawn:
 	if index not in pawns:
+		push_warning("Tried to access pawn of index '%s' but it yielded null" % index)
 		return null
 	return pawns[index]
 	

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="WorldPreset" load_steps=6 format=3 uid="uid://cye3c51gt4we7"]
+
+[ext_resource type="Script" path="res://world/preset.gd" id="1_ymchk"]
+[ext_resource type="Script" path="res://world/shapes/h_line.gd" id="2_orcmc"]
+[ext_resource type="Script" path="res://world/shapes/rect.gd" id="3_sxffl"]
+
+[sub_resource type="Resource" id="Resource_hv8ck"]
+script = ExtResource("2_orcmc")
+y = 46
+start_x = 0
+stop_x = 199
+object_id = 2
+
+[sub_resource type="Resource" id="Resource_r8rhd"]
+script = ExtResource("3_sxffl")
+top_left = Vector2i(0, 47)
+bottom_right = Vector2i(199, 49)
+object_id = 3
+
+[resource]
+script = ExtResource("1_ymchk")
+height = 50
+width = 200
+shapes = Array[Resource("res://world/preset_shape.gd")]([SubResource("Resource_hv8ck"), SubResource("Resource_r8rhd")])
