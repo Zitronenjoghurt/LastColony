@@ -4,6 +4,13 @@ extends WorldObjectState
 @export var is_active: bool = false
 @export var is_grounded: bool = false
 
+func update(state: GameState, index: int) -> void:
+	var grounded_value: int = state.grounded_map.get_value(index)
+	if grounded_value == 1:
+		is_grounded = true
+	else:
+		is_grounded = false
+
 func get_current_tile() -> WorldObjectTile:
 	var object: BuildingObject = get_world_object()
 	if not object is BuildingObject:

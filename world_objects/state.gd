@@ -3,6 +3,9 @@ extends Resource
 
 @export var id: WorldObject.ID
 
+func update(_state: GameState, _index: int) -> void:
+	return
+
 # What happens when you place this object
 func place() -> void:
 	return

@@ -10,10 +10,20 @@ extends Resource
 @export var new_pawn_index: int = 0
 
 # Maps
-var buildable_map: Array[int] = []
+var buildable_map: BuildableMap = BuildableMap.new()
+var grounded_map: GroundedMap = GroundedMap.new()
 
 var lock_object_states: Mutex = Mutex.new()
 var lock_pawns: Mutex = Mutex.new()
+
+func initialize() -> void:
+	buildable_map.initialize(map_height, map_width, 0)
+	grounded_map.initialize(map_height, map_width, 0)
+	full_update()
+	
+func full_update() -> void:
+	update_all_maps_full()
+	update_all_objects()
 
 func limit_camera(camera: Camera2D) -> void:
 	camera.limit_bottom = map_height * 16
@@ -41,11 +51,7 @@ func add_new_object_state_at_coords(coords: Vector2i, object_id: WorldObject.ID)
 	return add_new_object_state(index, object_id)
 
 func add_new_object_state(index: int, object_id: WorldObject.ID) -> bool:
-	var object: WorldObject = ObjectManager.get_object(object_id)
-	if not object is WorldObject:
-		push_error("An error occured while adding new object state of id '%s': Given ID did not yield any WorldObject" % WorldObject.get_id_name(object_id))
-		return false
-	var state: WorldObjectState = object.new_state()
+	var state: WorldObjectState = ObjectManager.new_object_state(object_id)
 	return add_object_state(index, state)
 	
 func add_object_state_at_coords(coords: Vector2i, object_state: WorldObjectState) -> bool:
@@ -73,23 +79,36 @@ func add_pawn(pawn: Pawn) -> void:
 	new_pawn_index += 1
 	lock_pawns.unlock()
 	
-func update_buildable_map() -> void:
-	buildable_map = Utils.populate_new_array_int(map_height * map_width, 0)
+func update_all_objects() -> void:
 	for index: int in get_object_state_indices():
-		var coords: Vector2i = index_to_coords(index)
-		if coords.y == 0:
+		var object_state: WorldObjectState = get_object_state_by_index(index)
+		if not object_state is WorldObjectState:
 			continue
-		var state: WorldObjectState = get_object_state_by_index(index)
-		if not state is WorldObjectState:
-			push_error("An unexpected error occured while updating buildable_map at index '%s' %s: State at index is not a WorldObjectState" % [index, coords])
-			continue
-		var object: WorldObject = state.get_world_object()
-		if not object is WorldObject:
-			push_error("An unexpected error occured while updating buildable_map at index '%s' %s: WorldObject of State at index is not a WorldObject" % [index, coords])
-			continue
-		if object.supports_buildings:
-			var buildable_index: int = coords_to_index(Vector2i(coords.x, coords.y - 1))
-			buildable_map[buildable_index] = 1
+		object_state.update(self, index)
+	
+func update_buildable_map_full() -> void:
+	buildable_map.update(self)
+	
+func update_grounded_map_full() -> void:
+	grounded_map.update(self)
+
+# Better for updating all data maps at once since you only iterate over every world object once
+func update_all_maps_full() -> void:
+	for index: int in get_object_state_indices():
+		update_all_maps_at_index(index)
+
+func update_all_maps_at_index(index: int) -> void:
+	var coords: Vector2i = index_to_coords(index)
+	var object_state: WorldObjectState = get_object_state_by_index(index)
+	if not object_state is WorldObjectState:
+		push_error("An unexpected error occured while updating all data maps at index '%s' %s: State at index is not a WorldObjectState" % [index, coords])
+		return
+	var object: WorldObject = object_state.get_world_object()
+	if not object is WorldObject:
+		push_error("An unexpected error occured while updating all data maps at index '%s' %s: WorldObject of State at index is not a WorldObject" % [index, coords])
+		return
+	buildable_map.update_single(coords, object, self)
+	grounded_map.update_single(coords, object, self)
 
 static func create_new(index: int) -> GameState:
 	var state: GameState = GameState.new()

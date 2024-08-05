@@ -34,7 +34,7 @@ func start_existing_game(index: int = 0) -> void:
 	_start_game()
 
 func _start_game() -> void:
-	state.update_buildable_map()
+	state.initialize()
 	get_tree().change_scene_to_packed(world_scene)
 
 func build_world_finished() -> void:
