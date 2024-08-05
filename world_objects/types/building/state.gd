@@ -1,8 +1,8 @@
 class_name BuildingObjectState
 extends WorldObjectState
 
-@export var is_active: bool = false
-@export var is_grounded: bool = false
+var is_active: bool = false
+var is_grounded: bool = false
 
 func update(state: GameState, index: int) -> void:
 	var grounded_value: int = state.grounded_map.get_value(index)

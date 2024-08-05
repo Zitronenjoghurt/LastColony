@@ -10,7 +10,6 @@ script = ExtResource("1_pa0b4")
 capacity = 0
 habitant_ids = Array[int]([])
 is_active = false
-is_grounded = false
 id = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fqgpg"]

@@ -116,17 +116,64 @@ static func create_new(index: int) -> GameState:
 	return state
 
 static func get_save_path(index: int) -> String:
-	return "user://savegame_"+ str(index) +".tres"
+	return "user://savegame_"+ str(index) +".save"
 
 static func save_file_exists(index: int) -> bool:
-	return ResourceLoader.exists(get_save_path(index))
+	return FileAccess.file_exists(get_save_path(index))
 
 static func load_state(index: int) -> GameState:
 	if not save_file_exists(index):
 		return GameState.create_new(index)
 	var path: String = get_save_path(index)
-	return load(path)
+	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
+	var json_string: String = file.get_as_text()
+	var json: JSON = JSON.new()
+	var parse_result: int = json.parse(json_string)
+	if not parse_result == OK:
+		push_error("An error occured while loading existing game state at index '%s': %s on line %s" % [index, json.get_error_message(), json.get_error_line()])
+		return
+	var data: Dictionary = json.get_data()
+	if not data is Dictionary:
+		push_error("An error occured while loading existing game state at index '%s': Retrieved data is not a dictionary" % index)
+		return
+	var state: GameState = GameState.from_dict(data)
+	if not state is GameState:
+		push_error("An error occured while loading existing game state at index '%s'" % index)
+		return
+	state.file_index = index
+	return state
 
 func save() -> void:
 	var path: String = GameState.get_save_path(file_index)
-	ResourceSaver.save(self, path)
+	var save_data: Dictionary = to_dict()
+	
+	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
+	if file == null:
+		push_error("An error occured while writing save file of index '%s': %s" % [file_index, FileAccess.get_open_error()])
+		return
+	
+	var json_string: String = JSON.stringify(save_data)
+	file.store_string(json_string)
+
+static func from_dict(data: Dictionary) -> Variant:
+	var context: String = "GameState"
+	var state: GameState = GameState.new()
+	
+	var _game_version: int = Deserialize.process_int(data, "game_version", context, true, 0, 1)
+	var _map_height: int = Deserialize.process_int(data, "map_height", context, true, 0, 1)
+	var _map_width: int = Deserialize.process_int(data, "map_width", context, true, 0, 1)
+	
+	# ToDo: iterate over values and check if one is null
+	
+	state.game_version = _game_version
+	state.map_height = _map_height
+	state.map_width = _map_width
+	
+	return state
+
+func to_dict() -> Dictionary:
+	var data: Dictionary = {}
+	data.game_version = game_version
+	data.map_height = map_height
+	data.map_width = map_width
+	return data
