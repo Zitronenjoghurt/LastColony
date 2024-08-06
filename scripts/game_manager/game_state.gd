@@ -159,15 +159,36 @@ static func from_dict(data: Dictionary) -> Variant:
 	var context: String = "GameState"
 	var state: GameState = GameState.new()
 	
-	var _game_version: int = Deserialize.process_int(data, "game_version", context, true, 0, 1)
+	var _game_version: int = Deserialize.process_int(data, "game_version", context, true, 1, 1)
 	var _map_height: int = Deserialize.process_int(data, "map_height", context, true, 0, 1)
 	var _map_width: int = Deserialize.process_int(data, "map_width", context, true, 0, 1)
+	var _new_pawn_index: int = Deserialize.process_int(data, "new_pawn_index", context, true, 0, 0)
 	
-	# ToDo: iterate over values and check if one is null
+	var failed: bool = Deserialize.check_for_null([_game_version, _map_height, _map_width, _new_pawn_index])
+	if failed:
+		return
+	
+	var _object_states_data: Dictionary = data.get("object_states", {})
+	var _object_states: Dictionary = {}
+	for index: String in _object_states_data:
+		if not index.is_valid_int():
+			push_error("GameState Deserialization: Skipped object state of unknown index, index was not an integer")
+			continue
+		var object_data: Dictionary = _object_states_data[index]
+		if not object_data is Dictionary:
+			push_error("GameState Deserialization: Skipped object state of index '%s', data is not a dictionary" % index)
+			continue
+		var object_state: WorldObjectState = ObjectManager.object_state_from_dict(object_data)
+		if not object_state is WorldObjectState:
+			push_error("GameState Deserialization: Skipped object state of index '%s', failed to create object state from data" % index)
+			continue
+		_object_states[index.to_int()] = object_state
 	
 	state.game_version = _game_version
 	state.map_height = _map_height
 	state.map_width = _map_width
+	state.object_states = _object_states
+	state.new_pawn_index = _new_pawn_index
 	
 	return state
 
@@ -176,4 +197,16 @@ func to_dict() -> Dictionary:
 	data.game_version = game_version
 	data.map_height = map_height
 	data.map_width = map_width
+	data.new_pawn_index = new_pawn_index
+	
+	var _object_states: Dictionary = {}
+	for index: int in get_object_state_indices():
+		var state: WorldObjectState = get_object_state_by_index(index)
+		if not state is WorldObjectState:
+			push_error("GameState Serialization: Skipped object state of index '%s', state is not a valid WorldObjectState" % index)
+			continue
+		_object_states[index] = state.to_dict()
+	
+	data.object_states = _object_states
+	
 	return data

@@ -22,4 +22,13 @@ func get_world_object() -> WorldObject:
 
 # Returns the source ID of the tile to be displayed by this object
 func get_current_tile() -> WorldObjectTile:
+	push_error("WorldObjectState get_current_tile: Unimplemented for state of id '%s'" % id)
 	return null
+
+static func from_dict(_data: Dictionary, _id: int) -> WorldObjectState:
+	push_error("WorldObjectState Deserialization: Unimplemented for state of id '%s'" % _id)
+	return null
+
+func to_dict() -> Dictionary:
+	push_error("WorldObjectState Serialization: Unimplemented for state of id '%s'" % id)
+	return {}

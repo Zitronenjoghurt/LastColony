@@ -53,6 +53,10 @@ func new_state() -> WorldObjectState:
 	state.id = id
 	return state
 
+func new_state_from_dict(_data: Dictionary, _id: int) -> WorldObjectState:
+	push_error("WorldObject new_state_from_dict: Unimplemented for WorldObject of id '%s'" % _id)
+	return null
+
 static func get_id_name(_id: ID) -> String:
 	if _id >= len(ID.keys()):
 		return str(_id)
