@@ -6,8 +6,8 @@ extends BuildingObjectState
 
 static func from_dict(data: Dictionary, _id: int) -> HousingBuildingState:
 	var context: String = "HousingBuildingState"
-	var _capacity: int = Deserialize.process_int(data, "capacity", context, true, 1)
-	var _habitant_ids: Array[int] = Deserialize.process_array_int(data, "habitant_ids", context)
+	var _capacity: int = Deserialize.process_int(data, "cpty", context, true, 1)
+	var _habitant_ids: Array[int] = Deserialize.process_array_int(data, "hb_ids", context)
 	
 	var failed: bool = Deserialize.check_for_null([_capacity, _habitant_ids])
 	if failed:
@@ -23,7 +23,7 @@ static func from_dict(data: Dictionary, _id: int) -> HousingBuildingState:
 func to_dict() -> Dictionary:
 	var data: Dictionary = {}
 	data.id = id
-	data.serde_id = "housing"
-	data.capacity = capacity
-	data.habitant_ids = habitant_ids
+	data.s_id = "housing"
+	data.cpty = capacity
+	data.hb_ids = habitant_ids
 	return data

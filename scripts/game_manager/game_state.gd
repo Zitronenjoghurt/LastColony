@@ -66,7 +66,10 @@ func add_object_state(index: int, object_state: WorldObjectState) -> bool:
 	object_states[index] = object_state
 	lock_object_states.unlock()
 	return true
-	
+
+func get_pawn_indices() -> Array:
+	return pawns.keys()
+
 func get_pawn_by_index(index: int) -> Pawn:
 	if index not in pawns:
 		push_warning("Tried to access pawn of index '%s' but it yielded null" % index)
@@ -184,10 +187,27 @@ static func from_dict(data: Dictionary) -> Variant:
 			continue
 		_object_states[index.to_int()] = object_state
 	
+	var _pawns_data: Dictionary = data.get("pawns", {})
+	var _pawns: Dictionary = {}
+	for index: String in _pawns_data:
+		if not index.is_valid_int():
+			push_error("Pawn Deserialization: Skipped pawn of unknown index, index was not an integer")
+			continue
+		var pawn_data: Dictionary = _pawns_data[index]
+		if not pawn_data is Dictionary:
+			push_error("Pawn Deserialization: Skipped pawn of index '%s', data is not a dictionary" % index)
+			continue
+		var pawn: Pawn = Pawn.from_dict(pawn_data)
+		if not pawn is Pawn:
+			push_error("Pawn Deserialization: Skipped pawn of index '%s', failed to create pawn from data" % index)
+			continue
+		_pawns[index.to_int()] = pawn
+	
 	state.game_version = _game_version
 	state.map_height = _map_height
 	state.map_width = _map_width
 	state.object_states = _object_states
+	state.pawns = _pawns
 	state.new_pawn_index = _new_pawn_index
 	
 	return state
@@ -207,6 +227,15 @@ func to_dict() -> Dictionary:
 			continue
 		_object_states[index] = state.to_dict()
 	
+	var _pawns: Dictionary = {}
+	for index: int in get_pawn_indices():
+		var pawn: Pawn = get_pawn_by_index(index)
+		if not pawn is Pawn:
+			push_error("Pawn Serialization: Skipped pawn of index '%s', pawn is not a valid Pawn" % index)
+			continue
+		_pawns[index] = pawn.to_dict()
+	
 	data.object_states = _object_states
+	data.pawns = _pawns
 	
 	return data
