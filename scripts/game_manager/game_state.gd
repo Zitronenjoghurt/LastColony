@@ -12,6 +12,7 @@ extends Resource
 # Maps
 var buildable_map: BuildableMap = BuildableMap.new()
 var grounded_map: GroundedMap = GroundedMap.new()
+var navigation_map: NavigationMap = NavigationMap.new()
 
 var lock_object_states: Mutex = Mutex.new()
 var lock_pawns: Mutex = Mutex.new()
@@ -19,6 +20,7 @@ var lock_pawns: Mutex = Mutex.new()
 func initialize() -> void:
 	buildable_map.initialize(map_height, map_width, 0)
 	grounded_map.initialize(map_height, map_width, 0)
+	navigation_map.initialize(map_height, map_width)
 	full_update()
 	
 func full_update() -> void:
@@ -112,6 +114,7 @@ func update_all_maps_at_index(index: int) -> void:
 		return
 	buildable_map.update_single(coords, object, self)
 	grounded_map.update_single(coords, object, self)
+	navigation_map.update_single(coords, index, object, self)
 
 static func create_new(index: int) -> GameState:
 	var state: GameState = GameState.new()

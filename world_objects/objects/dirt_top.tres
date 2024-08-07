@@ -27,4 +27,4 @@ icon = ExtResource("2_101l4")
 supports_buildings = true
 is_ground = true
 vertical_speed_multiplier = 2.08165e-12
-horizontal_speed_multiplier = 2.08165e-12
+horizontal_speed_multiplier = 1.0

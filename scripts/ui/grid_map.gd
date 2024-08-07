@@ -18,7 +18,7 @@ func reset() -> void:
 		for h: int in range(height):
 			reset_cell(w, h)
 
-func draw_from_bitmap(map: Array[int]) -> void:
+func draw_from_bitmap(map: Array) -> void:
 	if len(map) < height * width:
 		push_error("An error occured while drawind BackgroundGridMap from bitmap: Map size (%s) is too small for given height (%s) and width (%s)" % [len(map), height, width])
 		return

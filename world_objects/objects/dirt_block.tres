@@ -26,5 +26,5 @@ default_state = SubResource("Resource_v52p7")
 icon = ExtResource("2_6nqfm")
 supports_buildings = false
 is_ground = false
-vertical_speed_multiplier = 1.0
-horizontal_speed_multiplier = 1.0
+vertical_speed_multiplier = 2.08165e-12
+horizontal_speed_multiplier = 2.08165e-12
