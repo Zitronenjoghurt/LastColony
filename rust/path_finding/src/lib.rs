@@ -5,14 +5,10 @@ struct PathFinding;
 #[gdextension]
 unsafe impl ExtensionLibrary for PathFinding {}
 
-#[derive(GodotClass)]
-struct AStarPathFinder {
-    base: Base<RefCounted>,
+pub mod astar {
+    pub mod pathfinder;
 }
 
-#[godot_api]
-impl IRefCounted for AStarPathFinder {
-    fn init(base: Base<RefCounted>) -> Self {
-        AStarPathFinder { base }
-    }
+pub mod structures {
+    pub mod weighted_graph;
 }
