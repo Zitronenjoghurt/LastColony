@@ -1,0 +1,3 @@
+To build for Windows on MacOS:
+https://gist.github.com/Mefistophell/9787e1b6d2d9441c16d2ac79d6a505e6
+cargo build --target=x86_64-pc-windows-gnu --verbose
