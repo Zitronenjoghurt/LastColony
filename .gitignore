@@ -13,6 +13,10 @@ export_presets.cfg
 .mono/
 mono_crash.*.json
 
+# Rust
+Cargo.lock
+target
+
 # Custom
 .DS_Store
 .vscode

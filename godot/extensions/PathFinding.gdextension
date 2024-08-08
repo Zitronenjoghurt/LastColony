@@ -1,0 +1,14 @@
+[configuration]
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.2
+reloadable = true
+
+[libraries]
+linux.debug.x86_64 =     "res://../rust/path_finding/target/debug/libpath_finding.so"
+linux.release.x86_64 =   "res://../rust/path_finding/target/release/libpath_finding.so"
+windows.debug.x86_64 =   "res://../rust/path_finding/target/debug/path_finding.dll"
+windows.release.x86_64 = "res://../rust/path_finding/target/release/path_finding.dll"
+macos.debug =            "res://../rust/path_finding/target/debug/libpath_finding.dylib"
+macos.release =          "res://../rust/path_finding/target/release/libpath_finding.dylib"
+macos.debug.arm64 =      "res://../rust/path_finding/target/debug/libpath_finding.dylib"
+macos.release.arm64 =    "res://../rust/path_finding/target/release/libpath_finding.dylib"
