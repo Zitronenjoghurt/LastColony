@@ -5,7 +5,7 @@ extends Node2D
 @onready var object_map: TileMap = %ObjectMap
 @onready var camera: Camera2D = %Camera
 
-func _ready() -> void:
+func _ready() -> void:#
 	add_to_group("world")
 	object_map.tile_set = GameManager.objects_tileset
 	GameManager.state.limit_camera(camera)

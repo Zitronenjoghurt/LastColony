@@ -12,3 +12,7 @@ pub mod astar {
 pub mod structures {
     pub mod weighted_graph;
 }
+
+pub mod traits {
+    pub mod to_godot_array;
+}

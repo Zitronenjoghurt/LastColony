@@ -1,19 +1,28 @@
 use std::collections::{HashMap, HashSet};
 
 #[derive(Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Copy)]
-pub struct Edge((u32, u32));
+pub struct Edge {
+    a: u32,
+    b: u32,
+}
 
 impl Edge {
     fn new(source_node: u32, target_node: u32) -> Self {
         if source_node < target_node {
-            Edge((source_node, target_node))
+            Edge {
+                a: source_node,
+                b: target_node,
+            }
         } else {
-            Edge((target_node, source_node))
+            Edge {
+                a: target_node,
+                b: source_node,
+            }
         }
     }
 
     fn contains(&self, node: u32) -> bool {
-        self.0 .0 == node || self.0 .1 == node
+        self.a == node || self.b == node
     }
 }
 
@@ -25,11 +34,11 @@ pub struct WeightedGraph {
 }
 
 impl WeightedGraph {
-    fn add_node(&mut self, node: u32) {
+    pub fn add_node(&mut self, node: u32) {
         self.adj_list.entry(node).or_default();
     }
 
-    fn remove_node(&mut self, node: u32) {
+    pub fn remove_node(&mut self, node: u32) {
         // Remove node from its neighbors adjacency lists
         if let Some(neighbors) = self.adj_list.get(&node) {
             let neighbors = neighbors.clone();
@@ -56,7 +65,7 @@ impl WeightedGraph {
         self.adj_list.remove(&node);
     }
 
-    fn add_edge(&mut self, source_node: u32, target_node: u32, weight: u64) {
+    pub fn add_edge(&mut self, source_node: u32, target_node: u32, weight: u64) {
         self.adj_list
             .entry(source_node)
             .or_default()
@@ -73,7 +82,7 @@ impl WeightedGraph {
             .insert(Edge::new(source_node, target_node), weight);
     }
 
-    fn remove_edge(&mut self, source_node: u32, target_node: u32) {
+    pub fn remove_edge(&mut self, source_node: u32, target_node: u32) {
         if let Some(neighbors) = self.adj_list.get_mut(&source_node) {
             neighbors.remove(&target_node);
         }
@@ -102,20 +111,28 @@ impl WeightedGraph {
         }
     }
 
-    fn has_node(&self, node: u32) -> bool {
+    pub fn has_node(&self, node: u32) -> bool {
         self.adj_list.contains_key(&node)
     }
 
-    fn has_edge(&self, source_node: u32, target_node: u32) -> bool {
+    pub fn has_edge(&self, source_node: u32, target_node: u32) -> bool {
         self.weights
             .contains_key(&Edge::new(source_node, target_node))
     }
 
-    fn get_neighbors(&self, node: u32) -> Option<&HashSet<u32>> {
+    pub fn get_nodes(&self) -> Vec<u32> {
+        self.adj_list.keys().cloned().collect()
+    }
+
+    pub fn get_edges(&self) -> Vec<Edge> {
+        self.weights.keys().cloned().collect()
+    }
+
+    pub fn get_neighbors(&self, node: u32) -> Option<&HashSet<u32>> {
         self.adj_list.get(&node)
     }
 
-    fn get_weight(&self, source_node: u32, target_node: u32) -> Option<u64> {
+    pub fn get_weight(&self, source_node: u32, target_node: u32) -> Option<u64> {
         self.weights
             .get(&Edge::new(source_node, target_node))
             .copied()
@@ -196,5 +213,36 @@ mod tests {
         assert_eq!(graph.get_weight(1, 1), None);
         assert_eq!(graph.get_weight(1, 2), None);
         assert_eq!(graph.get_weight(2, 3), Some(40));
+    }
+
+    #[test]
+    fn test_get_nodes() {
+        let mut graph = WeightedGraph::default();
+
+        assert_eq!(graph.get_nodes(), vec![]);
+        graph.add_node(1);
+        graph.add_node(2);
+        graph.add_node(3);
+        graph.add_node(7);
+
+        let nodes = graph.get_nodes();
+        assert!(nodes.contains(&1));
+        assert!(nodes.contains(&2));
+        assert!(nodes.contains(&3));
+        assert!(!nodes.contains(&4));
+        assert!(nodes.contains(&7));
+    }
+
+    #[test]
+    fn test_get_edges() {
+        let mut graph = WeightedGraph::default();
+
+        assert_eq!(graph.get_edges(), vec![]);
+        graph.add_edge(1, 2, 50);
+        graph.add_edge(2, 3, 50);
+
+        let edges = graph.get_edges();
+        assert!(edges.contains(&Edge::new(1, 2)));
+        assert!(edges.contains(&Edge::new(2, 3)));
     }
 }
