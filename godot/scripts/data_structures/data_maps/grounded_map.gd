@@ -3,7 +3,7 @@
 class_name GroundedMap
 extends DataMap
 
-func update(state: GameState) -> void:
+func update(state: GameStateDepracated) -> void:
 	for index: int in state.get_object_state_indices():
 		var coords: Vector2i = state.index_to_coords(index)
 		var object_state: WorldObjectState = state.get_object_state_by_index(index)
@@ -16,7 +16,7 @@ func update(state: GameState) -> void:
 			continue
 		update_single(coords, object, state)
 
-func update_single(coords: Vector2i, object: WorldObject, state: GameState) -> void:
+func update_single(coords: Vector2i, object: WorldObject, state: GameStateDepracated) -> void:
 	if coords.y == 0:
 		return
 	if object.is_ground:

@@ -2,7 +2,7 @@ extends Node
 
 var world_scene: PackedScene = load(Paths.WORLD_SCENE)
 var objects_tileset: TileSet
-var state: GameState
+var state: GameStateDepracated
 var global: GlobalState
 
 signal load_game_started()
@@ -20,7 +20,7 @@ func _debug_startup_checks() -> void:
 	Paths.check()
 
 func save_game() -> void:
-	if state is GameState:
+	if state is GameStateDepracated:
 		state.save()
 	
 func start_new_game(preset: WorldPreset, index: int = 0) -> void:
@@ -30,7 +30,7 @@ func start_new_game(preset: WorldPreset, index: int = 0) -> void:
 
 func start_existing_game(index: int = 0) -> void:
 	load_game_started.emit()
-	state = GameState.load_state(index)
+	state = GameStateDepracated.load_state(index)
 	_start_game()
 
 func _start_game() -> void:

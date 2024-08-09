@@ -1,4 +1,4 @@
-class_name GameState
+class_name GameStateDepracated
 extends Resource
 
 @export var file_index: int
@@ -116,8 +116,8 @@ func update_all_maps_at_index(index: int) -> void:
 	grounded_map.update_single(coords, object, self)
 	navigation_map.update_single(coords, index, object, self)
 
-static func create_new(index: int) -> GameState:
-	var state: GameState = GameState.new()
+static func create_new(index: int) -> GameStateDepracated:
+	var state: GameStateDepracated = GameStateDepracated.new()
 	state.file_index = index
 	return state
 
@@ -127,9 +127,9 @@ static func get_save_path(index: int) -> String:
 static func save_file_exists(index: int) -> bool:
 	return FileAccess.file_exists(get_save_path(index))
 
-static func load_state(index: int) -> GameState:
+static func load_state(index: int) -> GameStateDepracated:
 	if not save_file_exists(index):
-		return GameState.create_new(index)
+		return GameStateDepracated.create_new(index)
 	var path: String = get_save_path(index)
 	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
 	var json_string: String = file.get_as_text()
@@ -142,15 +142,15 @@ static func load_state(index: int) -> GameState:
 	if not data is Dictionary:
 		push_error("An error occured while loading existing game state at index '%s': Retrieved data is not a dictionary" % index)
 		return
-	var state: GameState = GameState.from_dict(data)
-	if not state is GameState:
+	var state: GameStateDepracated = GameStateDepracated.from_dict(data)
+	if not state is GameStateDepracated:
 		push_error("An error occured while loading existing game state at index '%s'" % index)
 		return
 	state.file_index = index
 	return state
 
 func save() -> void:
-	var path: String = GameState.get_save_path(file_index)
+	var path: String = GameStateDepracated.get_save_path(file_index)
 	var save_data: Dictionary = to_dict()
 	
 	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
@@ -162,8 +162,8 @@ func save() -> void:
 	file.store_string(json_string)
 
 static func from_dict(data: Dictionary) -> Variant:
-	var context: String = "GameState"
-	var state: GameState = GameState.new()
+	var context: String = "GameStateDepracated"
+	var state: GameStateDepracated = GameStateDepracated.new()
 	
 	var _game_version: int = Deserialize.process_int(data, "game_version", context, true, 1, 1)
 	var _map_height: int = Deserialize.process_int(data, "map_height", context, true, 0, 1)
@@ -178,15 +178,15 @@ static func from_dict(data: Dictionary) -> Variant:
 	var _object_states: Dictionary = {}
 	for index: String in _object_states_data:
 		if not index.is_valid_int():
-			push_error("GameState Deserialization: Skipped object state of unknown index, index was not an integer")
+			push_error("GameStateDepracated Deserialization: Skipped object state of unknown index, index was not an integer")
 			continue
 		var object_data: Dictionary = _object_states_data[index]
 		if not object_data is Dictionary:
-			push_error("GameState Deserialization: Skipped object state of index '%s', data is not a dictionary" % index)
+			push_error("GameStateDepracated Deserialization: Skipped object state of index '%s', data is not a dictionary" % index)
 			continue
 		var object_state: WorldObjectState = ObjectManager.object_state_from_dict(object_data)
 		if not object_state is WorldObjectState:
-			push_error("GameState Deserialization: Skipped object state of index '%s', failed to create object state from data" % index)
+			push_error("GameStateDepracated Deserialization: Skipped object state of index '%s', failed to create object state from data" % index)
 			continue
 		_object_states[index.to_int()] = object_state
 	
@@ -226,7 +226,7 @@ func to_dict() -> Dictionary:
 	for index: int in get_object_state_indices():
 		var state: WorldObjectState = get_object_state_by_index(index)
 		if not state is WorldObjectState:
-			push_error("GameState Serialization: Skipped object state of index '%s', state is not a valid WorldObjectState" % index)
+			push_error("GameStateDepracated Serialization: Skipped object state of index '%s', state is not a valid WorldObjectState" % index)
 			continue
 		_object_states[index] = state.to_dict()
 	

@@ -10,7 +10,7 @@ func initialize(map_height: int, map_width: int) -> void:
 	h_map.initialize(map_height, map_width, 0)
 	v_map.initialize(map_height, map_width, 0)
 
-func update(state: GameState) -> void:
+func update(state: GameStateDepracated) -> void:
 	for index: int in state.get_object_state_indices():
 		var coords: Vector2i = state.index_to_coords(index)
 		var object_state: WorldObjectState = state.get_object_state_by_index(index)
@@ -23,7 +23,7 @@ func update(state: GameState) -> void:
 			continue
 		update_single(coords, index, object, state)
 
-func update_single(coords: Vector2i, index: int, object: WorldObject, state: GameState) -> void:
+func update_single(coords: Vector2i, index: int, object: WorldObject, state: GameStateDepracated) -> void:
 	set_at_index_v(object.vertical_speed_multiplier, index)
 	
 	# So pawns are able to walk above ground tiles

@@ -5,7 +5,7 @@ extends WorldPresetShape
 @export var start_y: int = 0
 @export var stop_y: int = 0
 
-func apply(state: GameState) -> void:
+func apply(state: GameStateDepracated) -> void:
 	for y: int in range(start_y, stop_y + 1):
 		var coords: Vector2i = Vector2i(x, y)
 		var success: bool = state.add_new_object_state_at_coords(coords, object_id)

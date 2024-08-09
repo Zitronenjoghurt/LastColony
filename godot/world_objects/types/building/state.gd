@@ -4,7 +4,7 @@ extends WorldObjectState
 var is_active: bool = false
 var is_grounded: bool = false
 
-func update(state: GameState, index: int) -> void:
+func update(state: GameStateDepracated, index: int) -> void:
 	var grounded_value: int = state.grounded_map.get_value(index)
 	if grounded_value == 1:
 		is_grounded = true

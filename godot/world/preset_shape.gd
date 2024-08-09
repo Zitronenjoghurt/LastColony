@@ -3,5 +3,5 @@ extends Resource
 
 @export var object_id: WorldObject.ID
 
-func apply(_state: GameState) -> void:
+func apply(_state: GameStateDepracated) -> void:
 	return

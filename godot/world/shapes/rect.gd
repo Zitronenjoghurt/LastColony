@@ -4,7 +4,7 @@ extends WorldPresetShape
 @export var top_left: Vector2i = Vector2i(0, 0)
 @export var bottom_right: Vector2i = Vector2i(0, 0)
 
-func apply(state: GameState) -> void:
+func apply(state: GameStateDepracated) -> void:
 	for y: int in range(top_left.y, bottom_right.y + 1):
 		for x: int in range(top_left.x, bottom_right.x + 1):
 			var coords: Vector2i = Vector2i(x, y)

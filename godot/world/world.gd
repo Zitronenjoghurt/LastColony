@@ -5,7 +5,7 @@ extends Node2D
 @onready var object_map: TileMap = %ObjectMap
 @onready var camera: Camera2D = %Camera
 
-func _ready() -> void:#
+func _ready() -> void:
 	add_to_group("world")
 	object_map.tile_set = GameManager.objects_tileset
 	GameManager.state.limit_camera(camera)
@@ -18,7 +18,7 @@ func _init_grid_map() -> void:
 	grid_map.draw_from_bitmap(GameManager.state.buildable_map.get_data())
 
 func _draw_all_world_objects() -> void:
-	var game_state: GameState = GameManager.state as GameState
+	var game_state: GameStateDepracated = GameManager.state as GameStateDepracated
 	for index: int in game_state.get_object_state_indices():
 		var object_state: WorldObjectState = game_state.get_object_state_by_index(index)
 		if not object_state is WorldObjectState:
