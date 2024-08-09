@@ -219,7 +219,7 @@ mod tests {
     fn test_get_nodes() {
         let mut graph = WeightedGraph::default();
 
-        assert_eq!(graph.get_nodes(), vec![]);
+        assert_eq!(graph.get_nodes(), vec![] as Vec<u32>);
         graph.add_node(1);
         graph.add_node(2);
         graph.add_node(3);

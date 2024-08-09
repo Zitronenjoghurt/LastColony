@@ -6,6 +6,7 @@ use godot::prelude::*;
 /// Custom A* path finding algorithm with a path cache built on using signposts between nodes.
 /// Optimized for quick access of the next optimal node on a path to a given target node.
 #[derive(GodotClass)]
+#[class(base=RefCounted)]
 struct AStarPathFinder {
     nav_graph: WeightedGraph,
     base: Base<RefCounted>,

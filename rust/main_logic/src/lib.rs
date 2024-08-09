@@ -5,8 +5,10 @@ struct PathFinding;
 #[gdextension]
 unsafe impl ExtensionLibrary for PathFinding {}
 
-pub mod astar {
-    pub mod pathfinder;
+pub mod pathfinder;
+
+pub mod entities {
+    pub mod pop;
 }
 
 pub mod structures {
