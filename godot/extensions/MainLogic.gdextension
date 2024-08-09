@@ -4,9 +4,9 @@ compatibility_minimum = 4.1
 reloadable = true
 
 [libraries]
-windows.debug.x86_64 =   "res://../rust/path_finding/target/x86_64-pc-windows-gnu/debug/path_finding.dll"
-windows.release.x86_64 = "res://../rust/path_finding/target/x86_64-pc-windows-gnu/release/path_finding.dll"
-macos.debug =            "res://../rust/path_finding/target/debug/libpath_finding.dylib"
-macos.release =          "res://../rust/path_finding/target/release/libpath_finding.dylib"
-macos.debug.arm64 =      "res://../rust/path_finding/target/debug/libpath_finding.dylib"
-macos.release.arm64 =    "res://../rust/path_finding/target/release/libpath_finding.dylib"
+windows.debug.x86_64 =   "res://../rust/main_logic/target/x86_64-pc-windows-gnu/debug/main_logic.dll"
+windows.release.x86_64 = "res://../rust/main_logic/target/x86_64-pc-windows-gnu/release/main_logic.dll"
+macos.debug =            "res://../rust/main_logic/target/debug/libmain_logic.dylib"
+macos.release =          "res://../rust/main_logic/target/release/libmain_logic.dylib"
+macos.debug.arm64 =      "res://../rust/main_logic/target/debug/libmain_logic.dylib"
+macos.release.arm64 =    "res://../rust/main_logic/target/release/libmain_logic.dylib"
