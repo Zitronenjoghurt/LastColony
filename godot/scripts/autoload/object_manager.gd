@@ -48,7 +48,7 @@ func get_object(id: WorldObject.ID) -> WorldObject:
 		return null
 	return objects_by_id[id]
 
-func new_object_state(id: WorldObject.ID) -> WorldObjectState:
+func new_object_state(id: WorldObject.ID) -> WorldObjectStateDeprecated:
 	var object: WorldObject = get_object(id)
 	if not object is WorldObject:
 		return null
@@ -57,17 +57,17 @@ func new_object_state(id: WorldObject.ID) -> WorldObjectState:
 func object_state_from_dict(data: Dictionary) -> Variant:
 	var id_variant: Variant = data.get("id")
 	if not id_variant is float and not id_variant is int:
-		push_error("WorldObjectState Deserialization: ID is not a valid integer")
+		push_error("WorldObjectStateDeprecated Deserialization: ID is not a valid integer")
 		return null
 	
 	var id: int = int(id_variant)
 	if id < 0 or id >= WorldObject.ID.size():
-		push_error("WorldObjectState Deserialization: ID '%s' is out of range" % id)
+		push_error("WorldObjectStateDeprecated Deserialization: ID '%s' is out of range" % id)
 		return null
 
 	var object: WorldObject = get_object(id)
 	if not object is WorldObject:
-		push_error("WorldObjectState Deserialization: Id '%s' has no valid WorldObject to use for deserialization" % id)
+		push_error("WorldObjectStateDeprecated Deserialization: Id '%s' has no valid WorldObject to use for deserialization" % id)
 		return null
 	
 	return object.new_state_from_dict(data, id)

@@ -37,4 +37,8 @@ impl PopCollection {
                 },
             )
     }
+
+    pub fn is_empty(&self) -> bool {
+        self.pops.is_empty()
+    }
 }

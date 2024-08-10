@@ -6,9 +6,9 @@ extends DataMap
 func update(state: GameStateDepracated) -> void:
 	for index: int in state.get_object_state_indices():
 		var coords: Vector2i = state.index_to_coords(index)
-		var object_state: WorldObjectState = state.get_object_state_by_index(index)
-		if not object_state is WorldObjectState:
-			push_error("An unexpected error occured while updating BuildableMap at index '%s' %s: State at index is not a WorldObjectState" % [index, coords])
+		var object_state: WorldObjectStateDeprecated = state.get_object_state_by_index(index)
+		if not object_state is WorldObjectStateDeprecated:
+			push_error("An unexpected error occured while updating BuildableMap at index '%s' %s: State at index is not a WorldObjectStateDeprecated" % [index, coords])
 			continue
 		var object: WorldObject = object_state.get_world_object()
 		if not object is WorldObject:

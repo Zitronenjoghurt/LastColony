@@ -23,8 +23,8 @@ func _init_grid_map() -> void:
 func _draw_all_world_objects() -> void:
 	var game_state: GameStateDepracated = GameManager.state as GameStateDepracated
 	for index: int in game_state.get_object_state_indices():
-		var object_state: WorldObjectState = game_state.get_object_state_by_index(index)
-		if not object_state is WorldObjectState:
+		var object_state: WorldObjectStateDeprecated = game_state.get_object_state_by_index(index)
+		if not object_state is WorldObjectStateDeprecated:
 			continue
 		var object_tile: WorldObjectTile = object_state.get_current_tile()
 		if not object_tile is WorldObjectTile:

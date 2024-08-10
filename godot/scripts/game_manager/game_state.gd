@@ -42,7 +42,7 @@ func index_to_coords(index: int) -> Vector2i:
 func get_object_state_indices() -> Array:
 	return object_states.keys()
 	
-func get_object_state_by_index(index: int) -> WorldObjectState:
+func get_object_state_by_index(index: int) -> WorldObjectStateDeprecated:
 	if not index in object_states:
 		push_warning("Tried to access object state of index '%s' but it yielded null" % index)
 		return null
@@ -53,14 +53,14 @@ func add_new_object_state_at_coords(coords: Vector2i, object_id: WorldObject.ID)
 	return add_new_object_state(index, object_id)
 
 func add_new_object_state(index: int, object_id: WorldObject.ID) -> bool:
-	var state: WorldObjectState = ObjectManager.new_object_state(object_id)
+	var state: WorldObjectStateDeprecated = ObjectManager.new_object_state(object_id)
 	return add_object_state(index, state)
 	
-func add_object_state_at_coords(coords: Vector2i, object_state: WorldObjectState) -> bool:
+func add_object_state_at_coords(coords: Vector2i, object_state: WorldObjectStateDeprecated) -> bool:
 	var index: int = coords_to_index(coords)
 	return add_object_state(index, object_state)
 
-func add_object_state(index: int, object_state: WorldObjectState) -> bool:
+func add_object_state(index: int, object_state: WorldObjectStateDeprecated) -> bool:
 	if index in object_states:
 		push_error("An error occured while adding object state of id '%s' at index '%s': There is already a state at the given index" % [WorldObject.get_id_name(object_state.id), index])
 		return false
@@ -86,8 +86,8 @@ func add_pawn(pawn: Pawn) -> void:
 	
 func update_all_objects() -> void:
 	for index: int in get_object_state_indices():
-		var object_state: WorldObjectState = get_object_state_by_index(index)
-		if not object_state is WorldObjectState:
+		var object_state: WorldObjectStateDeprecated = get_object_state_by_index(index)
+		if not object_state is WorldObjectStateDeprecated:
 			continue
 		object_state.update(self, index)
 	
@@ -104,9 +104,9 @@ func update_all_maps_full() -> void:
 
 func update_all_maps_at_index(index: int) -> void:
 	var coords: Vector2i = index_to_coords(index)
-	var object_state: WorldObjectState = get_object_state_by_index(index)
-	if not object_state is WorldObjectState:
-		push_error("An unexpected error occured while updating all data maps at index '%s' %s: State at index is not a WorldObjectState" % [index, coords])
+	var object_state: WorldObjectStateDeprecated = get_object_state_by_index(index)
+	if not object_state is WorldObjectStateDeprecated:
+		push_error("An unexpected error occured while updating all data maps at index '%s' %s: State at index is not a WorldObjectStateDeprecated" % [index, coords])
 		return
 	var object: WorldObject = object_state.get_world_object()
 	if not object is WorldObject:
@@ -184,8 +184,8 @@ static func from_dict(data: Dictionary) -> Variant:
 		if not object_data is Dictionary:
 			push_error("GameStateDepracated Deserialization: Skipped object state of index '%s', data is not a dictionary" % index)
 			continue
-		var object_state: WorldObjectState = ObjectManager.object_state_from_dict(object_data)
-		if not object_state is WorldObjectState:
+		var object_state: WorldObjectStateDeprecated = ObjectManager.object_state_from_dict(object_data)
+		if not object_state is WorldObjectStateDeprecated:
 			push_error("GameStateDepracated Deserialization: Skipped object state of index '%s', failed to create object state from data" % index)
 			continue
 		_object_states[index.to_int()] = object_state
@@ -224,9 +224,9 @@ func to_dict() -> Dictionary:
 	
 	var _object_states: Dictionary = {}
 	for index: int in get_object_state_indices():
-		var state: WorldObjectState = get_object_state_by_index(index)
-		if not state is WorldObjectState:
-			push_error("GameStateDepracated Serialization: Skipped object state of index '%s', state is not a valid WorldObjectState" % index)
+		var state: WorldObjectStateDeprecated = get_object_state_by_index(index)
+		if not state is WorldObjectStateDeprecated:
+			push_error("GameStateDepracated Serialization: Skipped object state of index '%s', state is not a valid WorldObjectStateDeprecated" % index)
 			continue
 		_object_states[index] = state.to_dict()
 	

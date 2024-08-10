@@ -30,7 +30,7 @@ enum JobType {
 # Determines the type of job this building offers
 @export var job_type: JobType = JobType.NONE
 @export var display_name: String
-@export var default_state: WorldObjectState
+@export var default_state: WorldObjectStateDeprecated
 @export var icon: Texture2D
 @export var supports_buildings: bool = true
 # Determines if buildings placed on this object will get is_grounded = true
@@ -48,12 +48,12 @@ func push_tile(tile: WorldObjectTile, tileset: TileSet) -> TileSet:
 func push_tiles(tileset: TileSet) -> TileSet:
 	return tileset
 
-func new_state() -> WorldObjectState:
-	var state: WorldObjectState = default_state.duplicate(true)
+func new_state() -> WorldObjectStateDeprecated:
+	var state: WorldObjectStateDeprecated = default_state.duplicate(true)
 	state.id = id
 	return state
 
-func new_state_from_dict(_data: Dictionary, _id: int) -> WorldObjectState:
+func new_state_from_dict(_data: Dictionary, _id: int) -> WorldObjectStateDeprecated:
 	push_error("WorldObject new_state_from_dict: Unimplemented for WorldObject of id '%s'" % _id)
 	return null
 

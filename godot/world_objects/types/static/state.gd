@@ -1,5 +1,5 @@
 class_name StaticObjectState
-extends WorldObjectState
+extends WorldObjectStateDeprecated
 
 func get_current_tile() -> WorldObjectTile:
 	var object: StaticObject = get_world_object()

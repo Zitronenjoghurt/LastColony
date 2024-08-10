@@ -15,7 +15,7 @@ pub struct GameState {
     map_height: u32,
     #[serde(default)]
     map_width: u32,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "PopCollection::is_empty")]
     pop_collection: PopCollection,
 }
 

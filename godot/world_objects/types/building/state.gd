@@ -1,5 +1,5 @@
 class_name BuildingObjectState
-extends WorldObjectState
+extends WorldObjectStateDeprecated
 
 var is_active: bool = false
 var is_grounded: bool = false
