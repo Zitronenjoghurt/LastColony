@@ -2,6 +2,8 @@ use crate::traits::serde::{FromJsonString, ToJsonString};
 use godot::prelude::*;
 use serde::{Deserialize, Serialize};
 
+use super::tick::PopTickResult;
+
 #[derive(GodotClass, Debug, Serialize, Deserialize)]
 #[class(no_init)]
 pub struct Pop {
@@ -36,7 +38,7 @@ impl Default for Pop {
 impl Pop {
     #[func]
     fn create(age_years: u64, seconds_per_year: u64) -> Gd<Self> {
-        Gd::from_object(Pop::_new_from_age(age_years, seconds_per_year))
+        Gd::from_object(Pop::new_from_age(age_years, seconds_per_year))
     }
 
     #[func]
@@ -50,22 +52,23 @@ impl Pop {
         self.to_json_string()
     }
 
-    fn _new_from_age(age_years: u64, seconds_per_year: u64) -> Self {
+    fn new_from_age(age_years: u64, seconds_per_year: u64) -> Self {
         Pop {
             age_seconds: age_years * seconds_per_year,
             ..Default::default()
         }
     }
 
-    fn _tick(&mut self, tps: u64) {
+    pub fn tick(&mut self, tps: u64) -> PopTickResult {
         self.delta_ticks += 1;
         if self.delta_ticks >= tps {
             self.delta_ticks = 0;
-            self._age_second();
-        }
+            self.age_second();
+        };
+        PopTickResult::default()
     }
 
-    fn _age_second(&mut self) {
+    fn age_second(&mut self) {
         self.age_seconds += 1
     }
 }
@@ -76,7 +79,7 @@ mod tests {
 
     #[test]
     fn test_new_from_age() {
-        let pop = Pop::_new_from_age(10, 120);
+        let pop = Pop::new_from_age(10, 120);
         assert_eq!(pop.age_seconds, 1200)
     }
 }

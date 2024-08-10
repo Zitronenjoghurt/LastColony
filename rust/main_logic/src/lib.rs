@@ -9,8 +9,12 @@ pub mod gamestate;
 pub mod pathfinder;
 
 pub mod entities {
-    pub mod pop;
-    pub mod pop_collection;
+    pub mod pop {
+        pub mod class;
+        pub mod collection;
+        pub mod tick;
+    }
+    pub mod tick_result;
 }
 
 pub mod structures {

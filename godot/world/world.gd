@@ -6,6 +6,9 @@ extends Node2D
 @onready var camera: Camera2D = %Camera
 
 func _ready() -> void:
+	var state: GameState = GameState.create(1, 1)
+	var result: TickResult = state.tick(1)
+	
 	add_to_group("world")
 	object_map.tile_set = GameManager.objects_tileset
 	GameManager.state.limit_camera(camera)

@@ -2,7 +2,7 @@ use godot::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    entities::pop_collection::PopCollection,
+    entities::{pop::collection::PopCollection, tick_result::TickResult},
     traits::serde::{FromJsonString, ToJsonString},
 };
 
@@ -36,6 +36,14 @@ impl GameState {
     #[func]
     fn to_json(&self) -> String {
         self.to_json_string()
+    }
+
+    #[func]
+    fn tick(&mut self, tps: u64) -> Gd<TickResult> {
+        let pop_result = self.pop_collection.tick(tps);
+
+        let tick_result = TickResult { pop_result };
+        Gd::from_object(tick_result)
     }
 
     fn new(file_index: u64, game_version: u64) -> Self {
