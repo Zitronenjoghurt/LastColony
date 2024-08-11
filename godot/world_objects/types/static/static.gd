@@ -1,7 +1,7 @@
 class_name StaticObject
 extends WorldObject
 
-@export var tile: WorldObjectTile
+@export var tile: WorldObjectTileDeprecated
 
 func _init() -> void:
 	type = WorldObject.TYPE.STATIC

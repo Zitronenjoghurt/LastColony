@@ -1,4 +1,4 @@
-class_name WorldObjectTile
+class_name WorldObjectTileDeprecated
 extends Resource
 
 @export var texture: Texture2D
@@ -11,8 +11,8 @@ var source_id: int = 0
 # Important for debugging information
 var placeholder_object_state: WorldObjectStateDeprecated
 
-static func create_placeholder(object_state: WorldObjectStateDeprecated) -> WorldObjectTile:
-	var tile: WorldObjectTile = WorldObjectTile.new()
+static func create_placeholder(object_state: WorldObjectStateDeprecated) -> WorldObjectTileDeprecated:
+	var tile: WorldObjectTileDeprecated = WorldObjectTileDeprecated.new()
 	tile.placeholder_object_state = object_state
 	return tile
 

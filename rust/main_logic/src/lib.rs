@@ -15,18 +15,23 @@ pub mod entities {
         pub mod tick;
     }
     pub mod world_object {
-        pub mod building_category;
-        pub mod id;
-        pub mod state;
-        pub mod template;
-        pub mod types {
-            pub mod housing {
-                pub mod state;
-                pub mod template;
-            }
+        pub mod behaviors {
+            pub mod housing;
+            pub mod stable;
         }
+        pub mod behavior;
+        pub mod collection;
+        pub mod common_data;
+        pub mod factory;
+        pub mod tile_library;
     }
+    pub mod display_tile;
     pub mod tick_result;
+}
+
+pub mod enums {
+    pub mod tile_type;
+    pub mod world_object_id;
 }
 
 pub mod structures {

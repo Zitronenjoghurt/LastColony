@@ -1,10 +1,10 @@
 class_name BuildingObject
 extends WorldObject
 
-@export var tile_ground_inactive: WorldObjectTile
-@export var tile_ground_active: WorldObjectTile
-@export var tile_up_inactive: WorldObjectTile
-@export var tile_up_active: WorldObjectTile
+@export var tile_ground_inactive: WorldObjectTileDeprecated
+@export var tile_ground_active: WorldObjectTileDeprecated
+@export var tile_up_inactive: WorldObjectTileDeprecated
+@export var tile_up_active: WorldObjectTileDeprecated
 
 func _init() -> void:
 	type = WorldObject.TYPE.BUILDING

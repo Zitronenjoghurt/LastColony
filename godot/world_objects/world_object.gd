@@ -38,8 +38,8 @@ enum JobType {
 @export var vertical_speed_multiplier: float = 1.0
 @export var horizontal_speed_multiplier: float = 1.0
 
-func push_tile(tile: WorldObjectTile, tileset: TileSet) -> TileSet:
-	if not tile is WorldObjectTile:
+func push_tile(tile: WorldObjectTileDeprecated, tileset: TileSet) -> TileSet:
+	if not tile is WorldObjectTileDeprecated:
 		return tileset
 	var source_id: int = tileset.add_source(tile.create_source())
 	tile.source_id = source_id

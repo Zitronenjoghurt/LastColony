@@ -21,7 +21,7 @@ func get_world_object() -> WorldObject:
 	return object
 
 # Returns the source ID of the tile to be displayed by this object
-func get_current_tile() -> WorldObjectTile:
+func get_current_tile() -> WorldObjectTileDeprecated:
 	push_error("WorldObjectStateDeprecated get_current_tile: Unimplemented for state of id '%s'" % id)
 	return null
 

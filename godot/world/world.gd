@@ -17,8 +17,8 @@ func _ready() -> void:
 	GameManager.build_world_finished()
 	
 func _init_grid_map() -> void:
-	grid_map.initialize(GameManager.state.map_height, GameManager.state.map_width)
-	grid_map.draw_from_bitmap(GameManager.state.buildable_map.get_data())
+	grid_map.initialize(GameManager.state.get_map_height(), GameManager.state.get_map_width())
+	#grid_map.draw_from_bitmap(GameManager.state.buildable_map.get_data())
 
 func _draw_all_world_objects() -> void:
 	var game_state: GameStateDepracated = GameManager.state as GameStateDepracated
@@ -26,8 +26,8 @@ func _draw_all_world_objects() -> void:
 		var object_state: WorldObjectStateDeprecated = game_state.get_object_state_by_index(index)
 		if not object_state is WorldObjectStateDeprecated:
 			continue
-		var object_tile: WorldObjectTile = object_state.get_current_tile()
-		if not object_tile is WorldObjectTile:
-			object_tile = WorldObjectTile.create_placeholder(object_state)
+		var object_tile: WorldObjectTileDeprecated = object_state.get_current_tile()
+		if not object_tile is WorldObjectTileDeprecated:
+			object_tile = WorldObjectTileDeprecated.create_placeholder(object_state)
 		var coords: Vector2i = game_state.index_to_coords(index)
 		object_tile.draw_at_coords(object_map, coords)

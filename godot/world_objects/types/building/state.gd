@@ -11,7 +11,7 @@ func update(state: GameStateDepracated, index: int) -> void:
 	else:
 		is_grounded = false
 
-func get_current_tile() -> WorldObjectTile:
+func get_current_tile() -> WorldObjectTileDeprecated:
 	var object: BuildingObject = get_world_object()
 	if not object is BuildingObject:
 		push_error("An error occured while retrieving BuildingObject for BuildingObjectState with id '%s': Retrieved object is not of type BuildingObject" % WorldObject.get_id_name(id))
