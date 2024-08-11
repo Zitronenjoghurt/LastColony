@@ -1,7 +1,7 @@
 class_name WorldPresetShape
 extends Resource
 
-@export var object_id: WorldObject.ID
+@export var template: WorldObjectTemplate
 
-func apply(_state: GameStateDepracated) -> void:
+func apply(_state: GameState) -> void:
 	return

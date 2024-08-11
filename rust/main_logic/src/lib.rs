@@ -23,6 +23,7 @@ pub mod entities {
         pub mod collection;
         pub mod common_data;
         pub mod factory;
+        pub mod tile;
         pub mod tile_library;
     }
     pub mod display_tile;

@@ -23,6 +23,9 @@ pub trait WorldObjectBehavior {
             location,
         }
     }
+    fn get_display_tile_gd(&self, location: Vector2i) -> Gd<DisplayTile> {
+        Gd::from_object(self.get_display_tile(location))
+    }
     fn apply_common_data(&mut self, common_data: Gd<WorldObjectCommonData>) {
         self.set_id(common_data.bind().id);
     }
@@ -30,22 +33,27 @@ pub trait WorldObjectBehavior {
 
 /// All behaviors share an enum so their instances can be stored together in a hashmap
 /// besides their different properties and behaviors.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum WorldObjectBehaviorType {
     Stable(StableBehavior),
     Housing(HousingBehavior),
 }
 
 impl WorldObjectBehaviorType {
-    fn get_behavior(&self) -> &dyn WorldObjectBehavior {
+    pub fn get_behavior(&self) -> &dyn WorldObjectBehavior {
         match self {
             WorldObjectBehaviorType::Stable(state) => state,
             WorldObjectBehaviorType::Housing(state) => state,
         }
     }
 
-    fn get_id(&self) -> WorldObjectId {
+    pub fn get_id(&self) -> WorldObjectId {
         let behavior = self.get_behavior();
         behavior.get_id()
+    }
+
+    pub fn get_display_tile_gd(&self, location: Vector2i) -> Gd<DisplayTile> {
+        let behavior = self.get_behavior();
+        behavior.get_display_tile_gd(location)
     }
 }

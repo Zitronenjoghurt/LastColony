@@ -1,29 +1,32 @@
-[gd_resource type="Resource" script_class="WorldPreset" load_steps=8 format=3 uid="uid://cye3c51gt4we7"]
+[gd_resource type="Resource" script_class="WorldPreset" load_steps=11 format=3 uid="uid://cye3c51gt4we7"]
 
 [ext_resource type="Script" path="res://world/preset.gd" id="1_ymchk"]
 [ext_resource type="Script" path="res://world/shapes/h_line.gd" id="2_orcmc"]
 [ext_resource type="Script" path="res://world/shapes/rect.gd" id="3_sxffl"]
+[ext_resource type="Resource" uid="uid://cnyktohymxniv" path="res://resources/world_object_templates/dirt_top.tres" id="3_v04w2"]
 [ext_resource type="Script" path="res://world/shapes/v_line.gd" id="4_mi7w4"]
+[ext_resource type="Resource" uid="uid://hr5ivg0tjaki" path="res://resources/world_object_templates/dirt_block.tres" id="5_fcs2r"]
+[ext_resource type="Resource" uid="uid://nb6v3btv6dtg" path="res://resources/world_object_templates/hut.tres" id="7_o4p2r"]
 
 [sub_resource type="Resource" id="Resource_hv8ck"]
 script = ExtResource("2_orcmc")
 y = 46
 start_x = 0
 stop_x = 199
-object_id = 2
+template = ExtResource("3_v04w2")
 
 [sub_resource type="Resource" id="Resource_r8rhd"]
 script = ExtResource("3_sxffl")
 top_left = Vector2i(0, 47)
 bottom_right = Vector2i(199, 49)
-object_id = 3
+template = ExtResource("5_fcs2r")
 
 [sub_resource type="Resource" id="Resource_6ycj5"]
 script = ExtResource("4_mi7w4")
 x = 10
 start_y = 44
 stop_y = 45
-object_id = 1
+template = ExtResource("7_o4p2r")
 
 [resource]
 script = ExtResource("1_ymchk")

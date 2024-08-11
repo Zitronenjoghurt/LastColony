@@ -1,6 +1,7 @@
 use godot::prelude::*;
 use serde::{Deserialize, Serialize};
 
+#[repr(u32)]
 #[derive(
     GodotConvert,
     Var,
@@ -18,8 +19,10 @@ use serde::{Deserialize, Serialize};
 )]
 #[godot(via = u32)]
 pub enum WorldObjectId {
-    None,
-    Hut,
+    None = 0,
+    DirtBlock = 1,
+    DirtTop = 2,
+    Hut = 3,
 }
 
 impl Default for WorldObjectId {

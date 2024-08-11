@@ -5,8 +5,10 @@ extends Resource
 @export var width: int = 50
 @export var shapes: Array[WorldPresetShape] = []
 
-func create_gamestate(index: int) -> GameStateDepracated:
-	var game_state: GameStateDepracated = GameStateDepracated.create_new(index)
+func create_gamestate(index: int) -> GameState:
+	var game_state: GameState = SaveManager.create_new(index)
+	game_state.set_map_height(height)
+	game_state.set_map_width(width)
 	for shape: WorldPresetShape in shapes:
 		shape.apply(game_state)
 	return game_state

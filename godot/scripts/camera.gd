@@ -6,8 +6,8 @@ var min_map_zoom: float = 0.0
 
 func _ready() -> void:
 	# Depending on the map, limit the zoom-out maximum so you can't look out of map
-	var min_map_zoom_x: float = Config.VIEWPORT_WIDTH / float(GameManager.state.map_width * 16)
-	var min_map_zoom_y: float = Config.VIEWPORT_HEIGHT / float(GameManager.state.map_height * 16)
+	var min_map_zoom_x: float = Config.VIEWPORT_WIDTH / float(GameManager.state.get_map_width() * 16)
+	var min_map_zoom_y: float = Config.VIEWPORT_HEIGHT / float(GameManager.state.get_map_height() * 16)
 	min_map_zoom = max(min_map_zoom_x, min_map_zoom_y)
 
 func _physics_process(delta: float) -> void:

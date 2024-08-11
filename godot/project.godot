@@ -17,9 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ObjectManager="*res://scripts/autoload/object_manager.gd"
 GameManager="*res://scripts/game_manager/game_manager.gd"
 LoadingScreen="*res://scenes/global/loading_screen.tscn"
+TemplateManager="*res://scripts/autoload/template_manager.gd"
 
 [debug]
 

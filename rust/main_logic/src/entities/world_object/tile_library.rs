@@ -9,12 +9,17 @@ use crate::{
 
 #[derive(Debug, Clone, Default)]
 pub struct TileLibraryEntry {
-    tiles: HashMap<TileType, u32>,
+    tiles: HashMap<TileType, (u32, Vector2i)>,
 }
 
 impl TileLibraryEntry {
-    fn add_source_id(&mut self, tile_type: TileType, source_id: u32) {
-        self.tiles.insert(tile_type, source_id);
+    fn add_source_id_and_atlas_coords(
+        &mut self,
+        tile_type: TileType,
+        source_id: u32,
+        atlas_coords: Vector2i,
+    ) {
+        self.tiles.insert(tile_type, (source_id, atlas_coords));
     }
 
     fn has_tile_type(&self, tile_type: TileType) -> bool {
@@ -41,25 +46,27 @@ impl TileLibrary {
 
     #[func]
     fn get_source_id(&self, object_id: WorldObjectId, tile_type: TileType) -> u32 {
-        self.entries
-            .get(&object_id)
-            .and_then(|entry| entry.tiles.get(&tile_type))
-            .copied()
-            .unwrap_or_default()
+        self.get_source_id_and_atlas_coords(object_id, tile_type).0
     }
 
     #[func]
-    fn add_source_id(
+    fn get_atlas_coords(&self, object_id: WorldObjectId, tile_type: TileType) -> Vector2i {
+        self.get_source_id_and_atlas_coords(object_id, tile_type).1
+    }
+
+    #[func]
+    fn add_source_id_and_atlas_coords(
         &mut self,
         object_id: WorldObjectId,
         tile_type: TileType,
         source_id: u32,
+        atlas_coords: Vector2i,
     ) -> bool {
         if self.has_object_tile_type(object_id, tile_type) {
             return false;
         }
         let entry = self.entries.entry(object_id).or_default();
-        entry.add_source_id(tile_type, source_id);
+        entry.add_source_id_and_atlas_coords(tile_type, source_id, atlas_coords);
         true
     }
 
@@ -70,5 +77,17 @@ impl TileLibrary {
         } else {
             false
         }
+    }
+
+    fn get_source_id_and_atlas_coords(
+        &self,
+        object_id: WorldObjectId,
+        tile_type: TileType,
+    ) -> (u32, Vector2i) {
+        self.entries
+            .get(&object_id)
+            .and_then(|entry| entry.tiles.get(&tile_type))
+            .copied()
+            .unwrap_or_default()
     }
 }

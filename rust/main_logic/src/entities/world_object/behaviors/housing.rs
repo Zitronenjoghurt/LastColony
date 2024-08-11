@@ -5,7 +5,7 @@ use crate::{
     enums::{tile_type::TileType, world_object_id::WorldObjectId},
 };
 
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct HousingBehavior {
     id: WorldObjectId,
     pub capacity: u32,
