@@ -24,13 +24,14 @@ pub mod entities {
         pub mod common_data;
         pub mod factory;
         pub mod tile;
-        pub mod tile_library;
     }
     pub mod display_tile;
     pub mod tick_result;
+    pub mod tile_library;
 }
 
 pub mod enums {
+    pub mod job_type;
     pub mod tile_type;
     pub mod world_object_id;
 }

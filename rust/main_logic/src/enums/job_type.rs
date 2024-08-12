@@ -17,18 +17,12 @@ use serde::{Deserialize, Serialize};
     Hash,
 )]
 #[godot(via = u32)]
-pub enum TileType {
+pub enum JobType {
     None = 0,
-    Persistent = 1,
-    Active = 2,
-    Inactive = 3,
-    ActiveUp = 4,
-    ActiveGround = 5,
-    InactiveUp = 6,
-    InactiveGround = 7,
+    Wood = 1,
 }
 
-impl Default for TileType {
+impl Default for JobType {
     fn default() -> Self {
         Self::None
     }

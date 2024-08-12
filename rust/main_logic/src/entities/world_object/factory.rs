@@ -34,10 +34,12 @@ impl BehaviorFactory {
         location: Vector2i,
         common_data: Gd<WorldObjectCommonData>,
         capacity: u32,
+        job_production: u32,
     ) {
         let mut state = HousingBehavior::default();
         state.apply_common_data(common_data);
-        state.capacity = capacity;
+        state.set_housing_capacity(capacity);
+        state.set_job_production(job_production);
         gamestate
             .bind_mut()
             .push_object(location, WorldObjectBehaviorType::Housing(state))
