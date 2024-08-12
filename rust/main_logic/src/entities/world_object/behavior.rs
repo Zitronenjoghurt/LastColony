@@ -3,40 +3,20 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     entities::display_tile::DisplayTile,
-    enums::{job_type::JobType, tile_type::TileType, world_object_id::WorldObjectId},
+    enums::{tile_type::TileType, world_object_id::WorldObjectId},
 };
 
 use super::{
     behaviors::{housing::HousingBehavior, stable::StableBehavior},
-    common_data::WorldObjectCommonData,
+    data::common::WorldObjectCommonData,
+    traits::housing::HousingBehaviorTrait,
 };
 
 /// A trait that has to be implemented by all behaviors.
 pub trait WorldObjectBehavior {
     fn get_id(&self) -> WorldObjectId;
     fn set_id(&mut self, id: WorldObjectId);
-
-    fn get_housing_capacity(&self) -> u32 {
-        0
-    }
-
-    fn set_housing_capacity(&mut self, _capacity: u32) {}
-
-    fn get_job_type(&self) -> JobType {
-        JobType::None
-    }
-
-    fn set_job_type(&mut self, _job_type: JobType) {}
-
-    fn get_job_production(&self) -> u32 {
-        0
-    }
-
-    fn set_job_production(&mut self, _job_production: u32) {}
-
-    fn get_current_tile_type(&self) -> TileType {
-        TileType::None
-    }
+    fn get_current_tile_type(&self) -> TileType;
 
     fn get_display_tile(&self, location: Vector2i) -> DisplayTile {
         DisplayTile {
@@ -50,13 +30,8 @@ pub trait WorldObjectBehavior {
         Gd::from_object(self.get_display_tile(location))
     }
 
-    fn apply_common_data(&mut self, common_data: Gd<WorldObjectCommonData>) {
+    fn apply_common_data(&mut self, common_data: &Gd<WorldObjectCommonData>) {
         self.set_id(common_data.bind().id);
-        self.set_job_type(common_data.bind().job_type)
-    }
-
-    fn provides_job(&self) -> bool {
-        self.get_job_type() != JobType::None
     }
 }
 
@@ -68,31 +43,43 @@ pub enum WorldObjectBehaviorType {
     Housing(HousingBehavior),
 }
 
+impl WorldObjectBehavior for WorldObjectBehaviorType {
+    fn get_id(&self) -> WorldObjectId {
+        self.as_behavior().get_id()
+    }
+
+    fn set_id(&mut self, id: WorldObjectId) {
+        self.as_behavior_mut().set_id(id);
+    }
+
+    fn get_display_tile_gd(&self, location: Vector2i) -> Gd<DisplayTile> {
+        self.as_behavior().get_display_tile_gd(location)
+    }
+
+    fn get_current_tile_type(&self) -> TileType {
+        self.as_behavior().get_current_tile_type()
+    }
+}
+
 impl WorldObjectBehaviorType {
-    pub fn get_behavior(&self) -> &dyn WorldObjectBehavior {
+    pub fn as_behavior(&self) -> &dyn WorldObjectBehavior {
         match self {
-            WorldObjectBehaviorType::Stable(state) => state,
-            WorldObjectBehaviorType::Housing(state) => state,
+            Self::Stable(state) => state,
+            Self::Housing(state) => state,
         }
     }
 
-    pub fn get_id(&self) -> WorldObjectId {
-        let behavior = self.get_behavior();
-        behavior.get_id()
+    pub fn as_behavior_mut(&mut self) -> &mut dyn WorldObjectBehavior {
+        match self {
+            Self::Stable(state) => state,
+            Self::Housing(state) => state,
+        }
     }
 
-    pub fn get_job_type(&self) -> JobType {
-        let behavior = self.get_behavior();
-        behavior.get_job_type()
-    }
-
-    pub fn get_display_tile_gd(&self, location: Vector2i) -> Gd<DisplayTile> {
-        let behavior = self.get_behavior();
-        behavior.get_display_tile_gd(location)
-    }
-
-    pub fn provides_job(&self) -> bool {
-        let behavior = self.get_behavior();
-        behavior.provides_job()
+    pub fn as_housing(&self) -> Option<&dyn HousingBehaviorTrait> {
+        match self {
+            Self::Housing(state) => Some(state),
+            _ => None,
+        }
     }
 }

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HousingWorldObjectTemplate" load_steps=6 format=3 uid="uid://nb6v3btv6dtg"]
+[gd_resource type="Resource" script_class="HousingWorldObjectTemplate" load_steps=7 format=3 uid="uid://nb6v3btv6dtg"]
 
 [ext_resource type="Script" path="res://world_object/templates/housing.gd" id="1_t0n0v"]
 [ext_resource type="Script" path="res://world_object/tiles/static.gd" id="2_pgydf"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="WorldObjectCommonData" id="WorldObjectCommonData_boc4h"]
 id = 3
+
+[sub_resource type="WorldObjectHousingData" id="WorldObjectHousingData_puc52"]
+capacity = 3
 
 [sub_resource type="WorldObjectTileBase" id="WorldObjectTileBase_1svj2"]
 tile_type = 1
@@ -15,6 +18,6 @@ y_offset = 1
 
 [resource]
 script = ExtResource("1_t0n0v")
-capacity = 3
+housing_data = SubResource("WorldObjectHousingData_puc52")
 common_data = SubResource("WorldObjectCommonData_boc4h")
 tiles = Array[Resource("res://world_object/tile.gd")]([SubResource("WorldObjectTileBase_1svj2")])

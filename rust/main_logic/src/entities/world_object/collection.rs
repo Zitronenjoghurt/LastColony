@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{entities::display_tile::DisplayTile, gamestate::GameState};
 
-use super::behavior::WorldObjectBehaviorType;
+use super::behavior::{WorldObjectBehavior, WorldObjectBehaviorType};
 use std::{
     collections::HashMap,
     sync::{Arc, RwLock},

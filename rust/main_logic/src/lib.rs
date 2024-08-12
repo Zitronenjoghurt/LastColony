@@ -19,9 +19,15 @@ pub mod entities {
             pub mod housing;
             pub mod stable;
         }
+        pub mod data {
+            pub mod common;
+            pub mod housing;
+        }
+        pub mod traits {
+            pub mod housing;
+        }
         pub mod behavior;
         pub mod collection;
-        pub mod common_data;
         pub mod factory;
         pub mod tile;
     }

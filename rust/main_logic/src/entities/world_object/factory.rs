@@ -1,10 +1,12 @@
 use godot::prelude::*;
 
-use crate::{entities::world_object::common_data::WorldObjectCommonData, gamestate::GameState};
+use crate::{entities::world_object::data::common::WorldObjectCommonData, gamestate::GameState};
 
 use super::{
     behavior::{WorldObjectBehavior, WorldObjectBehaviorType},
     behaviors::{housing::HousingBehavior, stable::StableBehavior},
+    data::housing::WorldObjectHousingData,
+    traits::housing::HousingBehaviorTrait,
 };
 
 /// WorlObjectTemplates will use this to spawn behaviors in the game state
@@ -22,7 +24,7 @@ impl BehaviorFactory {
         common_data: Gd<WorldObjectCommonData>,
     ) {
         let mut state = StableBehavior::default();
-        state.apply_common_data(common_data);
+        state.apply_common_data(&common_data);
         gamestate
             .bind_mut()
             .push_object(location, WorldObjectBehaviorType::Stable(state))
@@ -33,13 +35,11 @@ impl BehaviorFactory {
         mut gamestate: Gd<GameState>,
         location: Vector2i,
         common_data: Gd<WorldObjectCommonData>,
-        capacity: u32,
-        job_production: u32,
+        housing_data: Gd<WorldObjectHousingData>,
     ) {
         let mut state = HousingBehavior::default();
-        state.apply_common_data(common_data);
-        state.set_housing_capacity(capacity);
-        state.set_job_production(job_production);
+        state.apply_common_data(&common_data);
+        state.apply_housing_data(&housing_data);
         gamestate
             .bind_mut()
             .push_object(location, WorldObjectBehaviorType::Housing(state))
