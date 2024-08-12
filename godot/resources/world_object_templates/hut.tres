@@ -7,6 +7,7 @@
 [sub_resource type="WorldObjectCommonData" id="WorldObjectCommonData_dvlu8"]
 id = 3
 display_behavior = 2
+supports_buildings = true
 
 [sub_resource type="WorldObjectHousingData" id="WorldObjectHousingData_8xemu"]
 

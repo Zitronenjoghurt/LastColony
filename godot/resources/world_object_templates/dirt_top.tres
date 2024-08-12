@@ -7,6 +7,8 @@
 [sub_resource type="WorldObjectCommonData" id="WorldObjectCommonData_r7rob"]
 id = 2
 display_behavior = 1
+is_ground = true
+supports_buildings = true
 
 [sub_resource type="WorldObjectTileBase" id="WorldObjectTileBase_l6r8l"]
 tile_type = 1

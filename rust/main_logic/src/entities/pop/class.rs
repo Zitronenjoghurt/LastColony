@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use super::tick::PopTickResult;
 
-#[derive(GodotClass, Debug, Serialize, Deserialize)]
+#[derive(GodotClass, Debug, Serialize, Deserialize, Clone)]
 #[class(no_init)]
 pub struct Pop {
     #[serde(default)]

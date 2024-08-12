@@ -11,4 +11,8 @@ pub struct WorldObjectCommonData {
     pub id: WorldObjectId,
     #[export]
     pub display_behavior: DisplayBehavior,
+    #[export]
+    pub is_ground: bool,
+    #[export]
+    pub supports_buildings: bool,
 }

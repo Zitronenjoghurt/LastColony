@@ -31,6 +31,7 @@ pub mod entities {
     }
     pub mod display_tile;
     pub mod tick_result;
+    pub mod tile_data;
     pub mod tile_library;
 }
 

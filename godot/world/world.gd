@@ -18,7 +18,7 @@ func _ready() -> void:
 	
 func _init_grid_map() -> void:
 	grid_map.initialize(GameManager.state.get_map_height(), GameManager.state.get_map_width())
-	#grid_map.draw_from_bitmap(GameManager.state.buildable_map.get_data())
+	grid_map.draw_from_bitmap(GameManager.state.get_buildable_bitmap())
 
 func _draw_all_world_objects() -> void:
 	var game_state: GameState = GameManager.state as GameState

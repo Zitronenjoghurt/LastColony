@@ -1,7 +1,10 @@
 use godot::prelude::*;
 use serde::{Deserialize, Serialize};
 
-use crate::{entities::display_tile::DisplayTile, gamestate::GameState};
+use crate::{
+    entities::{display_tile::DisplayTile, tile_data::TileDataMap},
+    gamestate::GameState,
+};
 
 use std::{
     collections::HashMap,
@@ -12,9 +15,9 @@ use super::class::WorldObject;
 
 /// A collection that keeps track of all spawned behavior instances.
 /// Indexing starts at the top left of the map.
-#[derive(Default, Debug)]
+#[derive(Default, Debug, Clone)]
 pub struct WorldObjectCollection {
-    objects: Arc<RwLock<HashMap<u32, WorldObject>>>,
+    objects: Arc<RwLock<HashMap<u64, WorldObject>>>,
 }
 
 impl WorldObjectCollection {
@@ -23,20 +26,27 @@ impl WorldObjectCollection {
         let objects = self.objects.read().unwrap();
         objects.iter().for_each(|(index, object)| {
             let location = gamestate.index_to_coords(*index);
-            let display_tile = object.get_display_tile_gd(location);
+            let display_tile = object.get_display_tile_gd(location, gamestate);
             array.push(display_tile);
         });
 
         array
     }
 
-    pub fn add_at_index(&mut self, index: u32, state: WorldObject) {
+    pub fn add_at_index(&mut self, index: u64, state: WorldObject) {
         let mut objects = self.objects.write().unwrap();
         objects.insert(index, state);
     }
 
     pub fn is_empty(&self) -> bool {
         self.objects.read().unwrap().is_empty()
+    }
+
+    pub fn push_tile_data_full(&self, tile_data: &mut TileDataMap, map_width: u32) {
+        let objects = self.objects.write().unwrap();
+        objects
+            .iter()
+            .for_each(|(index, object)| object.write_tile_data(*index, tile_data, map_width));
     }
 }
 
