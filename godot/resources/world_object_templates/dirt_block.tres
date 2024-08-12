@@ -1,19 +1,20 @@
-[gd_resource type="Resource" script_class="StableWorldObjectTemplate" load_steps=6 format=3 uid="uid://hr5ivg0tjaki"]
+[gd_resource type="Resource" script_class="WorldObjectTemplate" load_steps=6 format=3 uid="uid://hidttrpsvqv6"]
 
-[ext_resource type="Script" path="res://world_object/templates/stable.gd" id="1_n62g3"]
+[ext_resource type="Script" path="res://world_object/template.gd" id="1_u320r"]
 [ext_resource type="Script" path="res://world_object/tiles/static.gd" id="2_luko2"]
 [ext_resource type="Texture2D" uid="uid://ojnsm3dp50rt" path="res://assets/objects/static/dirt_block.png" id="3_emlvk"]
 
-[sub_resource type="WorldObjectCommonData" id="WorldObjectCommonData_a61jb"]
+[sub_resource type="WorldObjectCommonData" id="WorldObjectCommonData_olorh"]
 id = 1
+display_behavior = 1
 
-[sub_resource type="WorldObjectTileBase" id="WorldObjectTileBase_0jst5"]
+[sub_resource type="WorldObjectTileBase" id="WorldObjectTileBase_pe8ve"]
 tile_type = 1
 script = ExtResource("2_luko2")
 texture = ExtResource("3_emlvk")
 y_offset = 0
 
 [resource]
-script = ExtResource("1_n62g3")
-common_data = SubResource("WorldObjectCommonData_a61jb")
-tiles = Array[Resource("res://world_object/tile.gd")]([SubResource("WorldObjectTileBase_0jst5")])
+script = ExtResource("1_u320r")
+common_data = SubResource("WorldObjectCommonData_olorh")
+tiles = Array[Resource("res://world_object/tile.gd")]([SubResource("WorldObjectTileBase_pe8ve")])

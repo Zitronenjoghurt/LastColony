@@ -20,12 +20,14 @@ use serde::{Deserialize, Serialize};
 pub enum TileType {
     None = 0,
     Persistent = 1,
-    Active = 2,
-    Inactive = 3,
-    ActiveUp = 4,
-    ActiveGround = 5,
-    InactiveUp = 6,
-    InactiveGround = 7,
+    Up = 2,
+    Ground = 3,
+    Active = 4,
+    Inactive = 5,
+    ActiveUp = 6,
+    ActiveGround = 7,
+    InactiveUp = 8,
+    InactiveGround = 9,
 }
 
 impl Default for TileType {

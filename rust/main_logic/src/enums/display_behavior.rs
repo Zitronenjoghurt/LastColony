@@ -14,18 +14,18 @@ use serde_repr::{Deserialize_repr, Serialize_repr};
     Eq,
     PartialOrd,
     Ord,
-    Hash,
 )]
 #[repr(u32)]
 #[godot(via = u32)]
-pub enum WorldObjectId {
+pub enum DisplayBehavior {
     None = 0,
-    DirtBlock = 1,
-    DirtTop = 2,
-    Hut = 3,
+    Persistent = 1,
+    Grounded = 2,
+    Activity = 3,
+    GroundedActivity = 4,
 }
 
-impl Default for WorldObjectId {
+impl Default for DisplayBehavior {
     fn default() -> Self {
         Self::None
     }

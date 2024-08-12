@@ -12,6 +12,11 @@ func load_templates() -> TileSet:
 	
 	# Store templates and generate tiles
 	var tileset: TileSet = TileSet.new()
+	var placeholder_source: TileSetAtlasSource = TileSetAtlasSource.new()
+	placeholder_source.texture = placeholder_tile_texture
+	placeholder_source.create_tile(Vector2i(0, 0))
+	tileset.add_source(placeholder_source)
+	
 	for path: String in templates_dir.get_files():
 		var template: WorldObjectTemplate = load(Paths.WORLD_OBJECT_TEMPLATES + path)
 		if not template is WorldObjectTemplate:

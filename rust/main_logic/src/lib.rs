@@ -17,16 +17,14 @@ pub mod entities {
     pub mod world_object {
         pub mod behaviors {
             pub mod housing;
-            pub mod stable;
         }
         pub mod data {
             pub mod common;
             pub mod housing;
         }
-        pub mod traits {
-            pub mod housing;
-        }
+        pub mod base;
         pub mod behavior;
+        pub mod class;
         pub mod collection;
         pub mod factory;
         pub mod tile;
@@ -37,6 +35,7 @@ pub mod entities {
 }
 
 pub mod enums {
+    pub mod display_behavior;
     pub mod job_type;
     pub mod tile_type;
     pub mod world_object_id;

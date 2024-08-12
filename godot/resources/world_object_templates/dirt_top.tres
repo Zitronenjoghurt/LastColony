@@ -1,19 +1,20 @@
-[gd_resource type="Resource" script_class="StableWorldObjectTemplate" load_steps=6 format=3 uid="uid://cnyktohymxniv"]
+[gd_resource type="Resource" script_class="WorldObjectTemplate" load_steps=6 format=3 uid="uid://bpgd30g763e3k"]
 
-[ext_resource type="Script" path="res://world_object/templates/stable.gd" id="1_ly3ag"]
-[ext_resource type="Script" path="res://world_object/tiles/static.gd" id="2_w80pq"]
-[ext_resource type="Texture2D" uid="uid://8f6qgxacftvm" path="res://assets/objects/static/dirt_top.png" id="3_owb08"]
+[ext_resource type="Script" path="res://world_object/template.gd" id="1_mbuf5"]
+[ext_resource type="Script" path="res://world_object/tiles/static.gd" id="2_sa6gk"]
+[ext_resource type="Texture2D" uid="uid://8f6qgxacftvm" path="res://assets/objects/static/dirt_top.png" id="3_d614x"]
 
-[sub_resource type="WorldObjectCommonData" id="WorldObjectCommonData_g47l8"]
+[sub_resource type="WorldObjectCommonData" id="WorldObjectCommonData_r7rob"]
 id = 2
+display_behavior = 1
 
-[sub_resource type="WorldObjectTileBase" id="WorldObjectTileBase_4n2f6"]
+[sub_resource type="WorldObjectTileBase" id="WorldObjectTileBase_l6r8l"]
 tile_type = 1
-script = ExtResource("2_w80pq")
-texture = ExtResource("3_owb08")
+script = ExtResource("2_sa6gk")
+texture = ExtResource("3_d614x")
 y_offset = 0
 
 [resource]
-script = ExtResource("1_ly3ag")
-common_data = SubResource("WorldObjectCommonData_g47l8")
-tiles = Array[Resource("res://world_object/tile.gd")]([SubResource("WorldObjectTileBase_4n2f6")])
+script = ExtResource("1_mbuf5")
+common_data = SubResource("WorldObjectCommonData_r7rob")
+tiles = Array[Resource("res://world_object/tile.gd")]([SubResource("WorldObjectTileBase_l6r8l")])

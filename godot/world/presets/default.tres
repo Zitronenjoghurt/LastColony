@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://world/preset.gd" id="1_ymchk"]
 [ext_resource type="Script" path="res://world/shapes/h_line.gd" id="2_orcmc"]
 [ext_resource type="Script" path="res://world/shapes/rect.gd" id="3_sxffl"]
-[ext_resource type="Resource" uid="uid://cnyktohymxniv" path="res://resources/world_object_templates/dirt_top.tres" id="3_v04w2"]
+[ext_resource type="Resource" uid="uid://bpgd30g763e3k" path="res://resources/world_object_templates/dirt_top.tres" id="3_v04w2"]
 [ext_resource type="Script" path="res://world/shapes/v_line.gd" id="4_mi7w4"]
-[ext_resource type="Resource" uid="uid://hr5ivg0tjaki" path="res://resources/world_object_templates/dirt_block.tres" id="5_fcs2r"]
-[ext_resource type="Resource" uid="uid://nb6v3btv6dtg" path="res://resources/world_object_templates/hut.tres" id="7_o4p2r"]
+[ext_resource type="Resource" uid="uid://hidttrpsvqv6" path="res://resources/world_object_templates/dirt_block.tres" id="5_fcs2r"]
+[ext_resource type="Resource" uid="uid://dhrgvruess3i7" path="res://resources/world_object_templates/hut.tres" id="7_o4p2r"]
 
 [sub_resource type="Resource" id="Resource_hv8ck"]
 script = ExtResource("2_orcmc")

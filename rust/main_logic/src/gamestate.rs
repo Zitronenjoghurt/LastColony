@@ -6,9 +6,7 @@ use crate::{
         display_tile::DisplayTile,
         pop::collection::PopCollection,
         tick_result::TickResult,
-        world_object::{
-            behavior::WorldObjectBehaviorType, collection::WorldObjectBehaviorCollection,
-        },
+        world_object::{class::WorldObject, collection::WorldObjectCollection},
     },
     traits::serde::{FromJsonString, ToJsonString},
 };
@@ -22,11 +20,8 @@ pub struct GameState {
     map_width: u32,
     #[serde(default, skip_serializing_if = "PopCollection::is_empty")]
     pop_collection: PopCollection,
-    #[serde(
-        default,
-        skip_serializing_if = "WorldObjectBehaviorCollection::is_empty"
-    )]
-    object_collection: WorldObjectBehaviorCollection,
+    #[serde(default, skip_serializing_if = "WorldObjectCollection::is_empty")]
+    object_collection: WorldObjectCollection,
 }
 
 #[godot_api]
@@ -95,7 +90,7 @@ impl GameState {
         self.map_width = width
     }
 
-    pub fn push_object(&mut self, location: Vector2i, state: WorldObjectBehaviorType) {
+    pub fn push_object(&mut self, location: Vector2i, state: WorldObject) {
         let index = self.coords_to_index(location);
         self.object_collection.add_at_index(index, state);
     }

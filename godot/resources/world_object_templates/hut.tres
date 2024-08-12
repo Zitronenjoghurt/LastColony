@@ -1,23 +1,29 @@
-[gd_resource type="Resource" script_class="HousingWorldObjectTemplate" load_steps=7 format=3 uid="uid://nb6v3btv6dtg"]
+[gd_resource type="Resource" script_class="WorldObjectTemplate" load_steps=8 format=3 uid="uid://dhrgvruess3i7"]
 
-[ext_resource type="Script" path="res://world_object/templates/housing.gd" id="1_t0n0v"]
-[ext_resource type="Script" path="res://world_object/tiles/static.gd" id="2_pgydf"]
-[ext_resource type="Texture2D" uid="uid://cn0let38x5y65" path="res://assets/objects/hut/hut.png" id="3_wt7f1"]
+[ext_resource type="Script" path="res://world_object/template.gd" id="1_4m4qr"]
+[ext_resource type="Script" path="res://world_object/tiles/static.gd" id="2_nnrdn"]
+[ext_resource type="Texture2D" uid="uid://cn0let38x5y65" path="res://assets/objects/hut/hut.png" id="3_aj7wx"]
 
-[sub_resource type="WorldObjectCommonData" id="WorldObjectCommonData_boc4h"]
+[sub_resource type="WorldObjectCommonData" id="WorldObjectCommonData_dvlu8"]
 id = 3
+display_behavior = 2
 
-[sub_resource type="WorldObjectHousingData" id="WorldObjectHousingData_puc52"]
-capacity = 3
+[sub_resource type="WorldObjectHousingData" id="WorldObjectHousingData_8xemu"]
 
-[sub_resource type="WorldObjectTileBase" id="WorldObjectTileBase_1svj2"]
-tile_type = 1
-script = ExtResource("2_pgydf")
-texture = ExtResource("3_wt7f1")
+[sub_resource type="WorldObjectTileBase" id="WorldObjectTileBase_4dsgp"]
+tile_type = 2
+script = ExtResource("2_nnrdn")
+texture = ExtResource("3_aj7wx")
+y_offset = 0
+
+[sub_resource type="WorldObjectTileBase" id="WorldObjectTileBase_lk7vj"]
+tile_type = 3
+script = ExtResource("2_nnrdn")
+texture = ExtResource("3_aj7wx")
 y_offset = 1
 
 [resource]
-script = ExtResource("1_t0n0v")
-housing_data = SubResource("WorldObjectHousingData_puc52")
-common_data = SubResource("WorldObjectCommonData_boc4h")
-tiles = Array[Resource("res://world_object/tile.gd")]([SubResource("WorldObjectTileBase_1svj2")])
+script = ExtResource("1_4m4qr")
+common_data = SubResource("WorldObjectCommonData_dvlu8")
+housing_data = SubResource("WorldObjectHousingData_8xemu")
+tiles = Array[Resource("res://world_object/tile.gd")]([SubResource("WorldObjectTileBase_4dsgp"), SubResource("WorldObjectTileBase_lk7vj")])
