@@ -16,11 +16,11 @@ impl HousingRegistrySlot {
         }
     }
 
-    pub fn exceeded_limit(&self) -> bool {
+    fn exceeded_limit(&self) -> bool {
         self.pop_indices.len() > self.limit as usize
     }
 
-    pub fn at_limit(&self) -> bool {
+    fn at_limit(&self) -> bool {
         self.pop_indices.len() >= self.limit as usize
     }
 
@@ -95,7 +95,7 @@ impl HousingRegistry {
     }
 
     /// Tries to register a pop in a given housing, returns true if successful,
-    /// returns false if the housing limit was reached
+    /// returns false if the pop was unable to be registered
     pub fn register_pop(&mut self, object_index: u64, pop_index: u64) -> bool {
         if let Some(mut slot) = self.slots.get_mut(&object_index) {
             slot.add_pop(pop_index)
@@ -197,6 +197,7 @@ mod tests {
         assert!(registry.has_pop_in_house(1, 1));
         assert!(registry.has_pop_in_house(1, 2));
         assert!(!registry.has_pop_in_house(1, 3));
+        assert!(!registry.has_pop_in_house(2, 1));
     }
 
     #[test]
@@ -217,6 +218,10 @@ mod tests {
                 .map_or(0, |slot| slot.pop_indices.len()),
             3
         );
+        let homeless_pops = registry.adjust_limit(1, 3);
+        assert!(homeless_pops.is_empty());
+        let homeless_pops = registry.adjust_limit(2, 3);
+        assert!(homeless_pops.is_empty());
     }
 
     #[test]
@@ -246,6 +251,7 @@ mod tests {
         assert!(registry.remove_pop(1, 3));
         assert!(!registry.remove_pop(1, 3));
         assert!(!registry.has_pop_in_house(1, 3));
+        assert!(!registry.remove_pop(2, 1));
     }
 
     #[test]
@@ -258,5 +264,21 @@ mod tests {
         registry.register_pop(1, 3);
         let homeless_pops = registry.replace_or_register_house(1, 5);
         assert_eq!(homeless_pops.len(), 3);
+    }
+
+    #[test]
+    fn test_get_pops_in_house() {
+        let mut registry = HousingRegistry::default();
+        registry.register_house(1, 3);
+        registry.register_pop(1, 1);
+        registry.register_pop(1, 2);
+        registry.register_pop(1, 3);
+        let pops = registry.get_pops_in_house(1);
+        assert!(pops.contains(&1));
+        assert!(pops.contains(&2));
+        assert!(pops.contains(&3));
+        assert!(!pops.contains(&4));
+        let pops = registry.get_pops_in_house(2);
+        assert!(pops.is_empty());
     }
 }
