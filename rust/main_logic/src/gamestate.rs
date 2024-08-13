@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 use crate::{
     entities::{
         display_tile::DisplayTile,
+        housing_registry::HousingRegistry,
         pop::collection::PopCollection,
         tick_result::TickResult,
         tile_data::TileDataMap,
@@ -30,6 +31,8 @@ pub struct GameState {
     pub tile_data: TileDataMap,
     #[serde(skip)]
     pub map_size: u64,
+    #[serde(skip)]
+    pub housing_registry: HousingRegistry,
 }
 
 #[godot_api]

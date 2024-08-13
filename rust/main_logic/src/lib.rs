@@ -30,6 +30,7 @@ pub mod entities {
         pub mod tile;
     }
     pub mod display_tile;
+    pub mod housing_registry;
     pub mod tick_result;
     pub mod tile_data;
     pub mod tile_library;
