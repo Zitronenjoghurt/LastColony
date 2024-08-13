@@ -3,7 +3,6 @@ extends Object
 
 const DEFAULT_WORLD_PRESET: String = "res://world/presets/default.tres"
 const GLOBAL_STATE: String = "user://global_state.tres"
-const OBJECTS: String = "res://world_objects/objects/"
 const PLACEHOLDER_TILE: String = "res://assets/ui/placeholder_tile.png"
 const WORLD_OBJECT_TEMPLATES: String = "res://resources/world_object_templates/"
 const WORLD_SCENE: String = "res://world/world.tscn"
